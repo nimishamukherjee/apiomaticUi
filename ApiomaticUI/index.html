@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>API-O-Matic</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<!-- Le styles -->
+		<link href="css/bootstrap.css" rel="stylesheet">
+		<link href="css/bootstrap-responsive.css" rel="stylesheet">
+		<link href="css/style.css" rel="stylesheet">
+		<link rel="shortcut icon" href="assets/ico/favicon.ico">
+		<link rel="apple-touch-icon-precomposed" href="pages/ico/apple-touch-icon-57-precomposed.png">
+	</head>
+	<body>
+		<div class="navbar">
+			<div id="banner">
+				<div id="logo-bar">
+					<div id="logo" class="brand"></div>
+					<div class="page-header">
+						APIOMatic - ClearPath's API Documentation
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container" id="indexdisplay">
+			<h3 class="muted">Services List</h3>
+			<!--Search Form-->
+			<form class="form-search">
+				<div class="input-append">
+					<input type="text" class="span2 search-query" placeholder="Search for a service">
+					<button type="submit" class="btn">Search</button>
+				</div>				
+			</form>
+			<div class="services">
+				<table class="table table-bordered" id="services-table">
+					<thead>
+						<tr>
+							<th style="width: 20%">Name</th>
+							<th style="width: 15%">Base URL</th>
+							<th style="width: 10%">Documentation</th>
+							<th style="width: 15%">Service Description URL</th>
+							<th style="width: 40%">Class</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td class="name"><a href="#"></a></td>
+							<td class="baseURL"></td>
+							<td class="documentation"></td>
+							<td class="serviceurl"></td>
+							<td class="class"></td>
+						</tr>
+					</tbody>
+				</table>				
+			</div>	
+		</div>
+		<!--/container-->
+		<!--Services Display End-->
+		<!--Api Description-->
+		<div class="container hide" id="apiDisplay">
+			<div class="row-fluid">
+				<div class="span10"><h3 class="muted" id="apititle">API Description for</h3></div>
+				<div class="span2 pull-right pagination-right"><a href="#" onclick="javascript:fnDisplayService();">View Services</a></div>
+			</div>
+			<hr />		
+			<div class="table-header well">About</div>
+			<table class="table table-bordered" id="apiTable">				
+				<tbody>					
+					<tr> 
+						<td>urls:</td>
+						<td id="mainurl"></td>
+					</tr>
+					<tr> 
+						<td class="text">packageName</td>
+						<td id="packageName"></td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="table-header well">Method</div>
+			<table class="table table-bordered" id="methodTemplate">
+				<tbody>				
+					<tr>
+						<td class="label_td">Consumes</td> 
+						<td class="consumes"></td>
+					</tr>
+					<tr>
+						<td>Header</td> <td class="headers"></td>
+					</tr>
+					<tr>
+						<td>Produces</td> <td class="produces"></td>
+					</tr>
+					<tr>
+						<td>URL</td><td class="urls"></td>
+					</tr>
+					<tr>
+						<td>Body</td><td class="body"></td>
+					</tr>
+					<tr>
+						<td>Params</td><td class="params"></td>
+					</tr>
+					<tr>
+						<td>Methods</td><td class="methods"></td>
+					</tr>					
+					<tr>
+						<td>Response</td>
+						<td>
+							<tr>
+								<td>-->Type</td>
+								<td class="response"></td>
+							</tr>
+						</td>
+					</tr>
+					<tr>
+						<td>*********************************</td>
+						<td>*********************************</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="table-header well">Type Definition</div>
+				<table class="table table-bordered td" id="typeDefinition">
+					<thead>
+						<td style="width:20%"></td>
+						<td style="width:80%"></td>
+					</thead>
+					<tbody>
+						<tr>
+							<td>type</td> <td class="type"></td>
+						</tr>
+						<tr>
+							<td>Property</td>
+							<td class="proType">
+								<table>
+									<tr>
+										<td>Name</td> 
+										<td>Type</td>
+									</tr>
+									<tr class="properties">
+										<td class="name"></td>
+										<td class="type"></td>
+										<td class="additional" style="border-top:none"></td>
+									</tr>
+								</table>						
+							</td>					
+						</tr>
+						<tr>
+							<td>subclasses</td> 
+							<td>
+								<tr>
+									<td class="subclasses"></td>
+								</tr>
+							</td>
+						</tr>
+						<tr>
+							<td>abstractClass</td><td class="abstractClass"></td>
+						</tr>
+						<td>*********************************</td>
+						<td>*********************************</td>
+					</tbody>
+				</table>
+			
+		</div>
+		<!--/container-->
+		<!--Api Description End-->
+		<footer></footer>
+
+
+		<!-- /container --><!-- Le javascript ================================================== --><!-- Placed at the end of the document so the pages load faster -->
+		<script src="js/jquery.js"></script>
+		<script src="js/bootstrap.js"></script>
+		<script src="js/pure.js"></script>
+		<script src="js/index.js"></script>
+
+		
+	<script>
+		
+	
+	</script>
+	
+	</body>
+</html>
