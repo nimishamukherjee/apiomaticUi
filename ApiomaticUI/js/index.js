@@ -1,6 +1,7 @@
 var services;
-var baseURL="data/"
-var ext=".json"
+var jsonPath="http://control.qa.intercloud.net:8080/Orchestration/services/"
+var currentUrl = $(location).attr('href');
+var serviceName="";
 //Search function
 function fnSearchAndFilter()
 {
@@ -51,15 +52,15 @@ function fnReturnType(obj){
 }
 //Display services page
 function fnDisplayService(){
-	location.reload();
+	window.location=currentUrl.substring(0,currentUrl.indexOf("?controller"));
 }
 //Display api details
 function fnDisplayApiDetails(url){
 //Hide services
 	$("#indexdisplay").addClass("hide");
 	$("#apiDisplay").removeClass("hide");
-	$("#apititle").append(url);
 	
+
 	var directive = {
 		'td#mainurl':'urls',		
 		'td#packageName':'packageName',
@@ -208,11 +209,15 @@ function fnDisplayApiDetails(url){
 			}
 		}
 	};	
-	var pathUrl = baseURL+url+ext;
-	$.getJSON(pathUrl, function(json) {
+	$.getJSON(url, function(json) {
 		$('table#apiTable').render(json, directive);
 		$('table#methodTemplate').render(json, directiveMethod);
-		$('div#typeDefinition').render(json, directiveMD);	
+		$('div#typeDefinition').render(json, directiveMD);
+		if(serviceName.indexOf("#")>=0){
+			var anchor = (serviceName.substring(serviceName.indexOf("#"),serviceName.length));
+			serviceName = serviceName.substring(0,serviceName.indexOf("#"));			
+		}	
+		$("#apititle").append(serviceName);	
 		$(".required").hover(
 			function () {
 				$(this).next().removeClass('hide');
@@ -229,27 +234,32 @@ function fnDisplayApiDetails(url){
 
 
 $(document).ready(function() {
-	var directive = {
-		'tbody tr':{
-			'services<-services':{
-				"td.name a": "#{services.name}",
-				"td.baseURL": "#{services.baseUrl}",
-				"td.documentation": "#{services.documentation}"
+	//check the url for ?controller
+	if(currentUrl.indexOf("?controller")>=0){
+		serviceName = currentUrl.substring(currentUrl.indexOf("=")+1,String(currentUrl).length);		
+		var url = jsonPath+serviceName;
+		fnDisplayApiDetails(url);
+	}else{		
+		var directive = {
+			'tbody tr':{
+				'services<-services':{
+					"td.name a": "#{services.name}",
+					"td.baseURL": "#{services.baseUrl}",
+					"td.documentation": "#{services.documentation}"
+				}
 			}
-		}
-	};	
-	var pathUrl = baseURL+"services"+ext;
-	$.getJSON(pathUrl, function(json) {
-		var jsObj = null;
-		jsObj = {"services":json};
-		$('table#services-table').render(jsObj, directive);
-		fnSearchAndFilter();
-		//define the click function
-		$('td.name a').click(function(){
-			var callUrl = $(this).html();
-			fnDisplayApiDetails(callUrl);
-		});		
-	});
-	
+		};	
+		$.getJSON(jsonPath, function(json) {
+			var jsObj = null;
+			jsObj = {"services":json};
+			$('table#services-table').render(jsObj, directive);
+			fnSearchAndFilter();
+			//define the click function for service name
+			$('td.name a').click(function(){
+				serviceName = $(this).html();
+				window.location=currentUrl+"?controller="+$(this).html();			
+			});		
+		});
+	}	
 	
 });
