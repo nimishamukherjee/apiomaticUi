@@ -83,7 +83,9 @@ function fnDisplayApiDetails(url){
 				'tr.rowproduces@class':function(arg){
 					return arg.item.produces=="" ? "hide" : "";
 				},			
-				'tr td.urls': "#{method.urls}",
+				'tr td.urls a': "#{method.urls}",
+				'tr td.urls a@href+': "#{method.urls}",
+				'tr td.urls@id': "#{method.urls}",
 				'tr.rowurls@class':function(arg){
 					return arg.item.urls=="" ? "hide" : "";
 				},
