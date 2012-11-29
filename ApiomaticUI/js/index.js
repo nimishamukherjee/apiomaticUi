@@ -1,5 +1,3 @@
-//author: Nimisha
-//Initial version: 0.0.1
 var services;
 var baseURL="data/"
 var ext=".json"
@@ -96,23 +94,21 @@ function fnDisplayApiDetails(url){
 			}
 		}
 	};
-	
-	directiveMD = {
-		'tbody':{
+	directiveMD={
+		'div.repdiv':{
 			'method<-typeDefinitions':{
-				"tr td.type b": "#{method.type}",
-				"tr td.type@id":"#{method.type}",
-				
-				"tr td.doc":"#{method.documentation}",
-				'tr.rowdoc@class':function(arg){
+				'div.type b':"#{method.type}",
+				"div.type@id":"#{method.type}",								
+				'table tr td.doc':"#{method.documentation}",
+				'table tr.rowdoc@class':function(arg){
 					return (arg.item.documentation=="" || arg.item.documentation==undefined) ? "hide" : "";
 				},
-				'tr.rowproperties@class':function(arg){
-							return (arg.item.properties=="" || arg.item.properties==undefined) ? "hide" : "";
-						},
-				'tr.properties':{
-					"property <- method.properties" : {						
-						 "td.type": function(arg){
+				'table tr.rowprops@class':function(arg){
+					return (arg.item.properties=="" || arg.item.properties==undefined) ? "hide" : "";
+				},
+				'table tr.properties':{
+					"property <- method.properties" : {
+						"td.type": function(arg){
 							switch(arg.item.type)
 							{
 								case "array": 
@@ -133,38 +129,56 @@ function fnDisplayApiDetails(url){
 									return ("<a href=\"#"+arg.item.type+"\">"+arg.item.type+"</a>");
 								break;
 							}
-							},
-          				 "tr td.name":"#{property.name}",
-						 "tr td.additional": function(arg){
-							var str=""
-							if(arg.item.optional!=undefined){
-								str += "Optional : "+arg.item.optional+"<br /><br />";
+						},
+						"tr td.name+":"#{property.name}",
+						"tr td.name span.required@class":function(arg){
+							if(arg.item.optional==false || arg.item.optional=="false"){
+								return "required";
+							}else{
+								return "hide";
 							}
-							if(arg.item.requiredValue!=undefined){
-								str += "Required Value : "+"<a href=\"#"+arg.item.requiredValue+"\">"+arg.item.requiredValue+"</a>";
+						},
+						"tr td.name div.alert": function(arg){
+							if(arg.item.optional==false || arg.item.optional=="false"){
+								return arg.item.requiredValue;
+							}else{
+								return "";
 							}
-							return str;
-								
 						 }
-					}						
+					}
 				},
-				"tr td.subclasses": "#{method.subclasses}",
-				'tr.rowsubclasses@class':function(arg){
-					return (arg.item.subclasses=="" || arg.item.subclasses==undefined) ? "hide" : "";
+				'table tr td.subclass':function(arg){
+					var str = "";
+					var obj = arg.item.subclasses
+					if(obj !="")
+					{
+						for(j in obj ){
+							var ref = obj[j];
+							for(k in ref){
+								str += "<a href=\"#"+ref[k]+"\">"+ref[k]+"</a>, ";
+							}
+						}
+					}				
+					return str;
+					//"<a href=\"#"+arg.item.type+"\">"+arg.item.type+"</a>"
 				},
-				"tr td.abstractClass": "#{method.abstractClass}",
-				'tr.rowabstract@class':function(arg){
+				'table tr.rowsub@class':function(arg){
+					return (arg.item.subclasses=="") ? "hide" : "";
+					
+				},
+				'table tr td.abstract':"#{method.abstractClass}",
+				'table tr.rowabstract@class':function(arg){
 					return (arg.item.abstractClass=="" || arg.item.abstractClass==undefined) ? "hide" : "";
 				}
-				}
+			}
 		}
-	};
+	};	
 	var pathUrl = baseURL+url+ext;
 	$.getJSON(pathUrl, function(json) {
 		$('table#apiTable').render(json, directive);
-		var rfn = $('table#methodTemplate').compile( directiveMethod )
-		$('table#methodTemplate').render(json, rfn);
-		$('table#typeDefinition').render(json, directiveMD);
+		//var rfn = $('table#methodTemplate').compile( directiveMethod )		
+		$('table#methodTemplate').render(json, directiveMethod);
+		$('div#typeDefinition').render(json, directiveMD);		
 	});
 }
 
