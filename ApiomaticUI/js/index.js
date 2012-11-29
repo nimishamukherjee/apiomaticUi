@@ -17,14 +17,14 @@ function fnReturnType(obj){
 					if(j=="nestedType"){
 						var ref = obj[j];
 						for(k in ref){
-							return ("Array of <a href=\"#"+ref[k]+"\">"+ref[k]+"</a>");
+							return ("Type is an array of <a href=\"#"+ref[k]+"\">"+ref[k]+"</a>");
 						}
 					}
 				}
 				
 			break;
 			default:
-				return("<a href=\"#"+obj[i]+"\">"+ obj[i]+"</a>");
+				return("Type is <a href=\"#"+obj[i]+"\">"+ obj[i]+"</a>");
 			break;
 		}
 		
@@ -42,23 +42,55 @@ function fnDisplayApiDetails(url){
 	$("#apititle").append(url);
 	
 	var directive = {
-		'td#mainurl':'urls',
-		'td#packageName':'packageName'
+		'td#mainurl':'urls',		
+		'td#packageName':'packageName',
+		'td.controllerdoc':'documentation',
+		'tr.rowdoc@class':function(arg){
+			return (arg.documentation =="" || arg.documentation ==undefined) ? "hide" : "";
+		}
 	}
 	directiveMethod = {
 		'tbody':{
 			'method<-methods':{
 				"tr td.consumes": "#{method.consumes}",
+				'tr.rowconsumes@class':function(arg){
+					return arg.item.consumes=="" ? "hide" : "";
+				},
 				'tr td.headers': "#{method.headers}",
+				'tr.rowheaders@class':function(arg){
+					return arg.item.headers=="" ? "hide" : "";
+				},
 				'tr td.produces': "#{method.produces}",
+				'tr.rowproduces@class':function(arg){
+					return arg.item.produces=="" ? "hide" : "";
+				},			
 				'tr td.urls': "#{method.urls}",
+				'tr.rowurls@class':function(arg){
+					return arg.item.urls=="" ? "hide" : "";
+				},
+				'tr td.documentation': "#{method.documentation}",
+				'tr.rowdoc@class':function(arg){
+					return (arg.item.documentation=="" || arg.item.documentation==undefined) ? "hide" : "";
+				},
 				'tr td.body' : function(arg){
 					return (fnReturnType(arg.item.body))
 				},
+				'tr.rowbody@class':function(arg){
+					return (arg.item.body=="" || arg.item.body==undefined) ? "hide" : "";
+				},	
 				'tr td.methods': "#{method.methods}",
-				'tr td.params': "#{method.params}",				
+				'tr.rowmethods@class':function(arg){
+					return arg.item.methods=="" ? "hide" : "";
+				},	
+				'tr td.params': "#{method.params}",	
+				'tr.rowparams@class':function(arg){
+					return arg.item.params=="" ? "hide" : "";
+				},	
 				'tr td.response' : function(arg){
 					return (fnReturnType(arg.item.response))
+				},
+				'tr.rowresponse@class':function(arg){
+					return (arg.item.response=="" || arg.item.response==undefined) ? "hide" : "";
 				}
 
 			}
@@ -68,10 +100,18 @@ function fnDisplayApiDetails(url){
 	directiveMD = {
 		'tbody':{
 			'method<-typeDefinitions':{
-				"tr td.type": "#{method.type}",
+				"tr td.type b": "#{method.type}",
 				"tr td.type@id":"#{method.type}",
+				
+				"tr td.doc":"#{method.documentation}",
+				'tr.rowdoc@class':function(arg){
+					return (arg.item.documentation=="" || arg.item.documentation==undefined) ? "hide" : "";
+				},
+				'tr.rowproperties@class':function(arg){
+							return (arg.item.properties=="" || arg.item.properties==undefined) ? "hide" : "";
+						},
 				'tr.properties':{
-					"property <- method.properties" : {
+					"property <- method.properties" : {						
 						 "td.type": function(arg){
 							switch(arg.item.type)
 							{
@@ -108,14 +148,22 @@ function fnDisplayApiDetails(url){
 						 }
 					}						
 				},
-				"tr td.subclasses": "#{method.subclasses}"
+				"tr td.subclasses": "#{method.subclasses}",
+				'tr.rowsubclasses@class':function(arg){
+					return (arg.item.subclasses=="" || arg.item.subclasses==undefined) ? "hide" : "";
+				},
+				"tr td.abstractClass": "#{method.abstractClass}",
+				'tr.rowabstract@class':function(arg){
+					return (arg.item.abstractClass=="" || arg.item.abstractClass==undefined) ? "hide" : "";
+				}
 				}
 		}
 	};
 	var pathUrl = baseURL+url+ext;
 	$.getJSON(pathUrl, function(json) {
 		$('table#apiTable').render(json, directive);
-		$('table#methodTemplate').render(json, directiveMethod);
+		var rfn = $('table#methodTemplate').compile( directiveMethod )
+		$('table#methodTemplate').render(json, rfn);
 		$('table#typeDefinition').render(json, directiveMD);
 	});
 }
@@ -127,9 +175,7 @@ $(document).ready(function() {
 			'services<-services':{
 				"td.name a": "#{services.name}",
 				"td.baseURL": "#{services.baseUrl}",
-				"td.documentation": "#{services.documentation}",
-				"td.serviceurl": "#{services.serviceDescriptionUrl}",
-				"td.class": "#{services.class}"
+				"td.documentation": "#{services.documentation}"
 			}
 		}
 	};	
@@ -142,7 +188,8 @@ $(document).ready(function() {
 		$('td.name a').click(function(){
 			var callUrl = $(this).html();
 			fnDisplayApiDetails(callUrl);
-		});
-		
+		});		
 	});
+	
+	
 });

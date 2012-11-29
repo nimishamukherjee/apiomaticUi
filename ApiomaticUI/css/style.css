@@ -30,7 +30,7 @@ table th, table td { overflow: hidden; }
 
 .services > table > thead, .well
 {
-	background-color: #666666;
+	background-color: #4b6dc1;
 	color: #FFF;
 }
 .table td
@@ -47,7 +47,21 @@ footer > p {
 }
 .table-header{
 	padding: 0.5%;
-	margin-left: 0.8%;
+	margin-left: 0%;
 	font-weight: bold;
-	width: 97%;
+	width: 99%;
+}
+		
+.sub_heading{
+background:#f0f0f0;
+border-top:#dddddd 1px solid;
+border-left:#dddddd 1px solid;
+border-right:#dddddd 1px solid;
+height:25px;
+padding:5px;
+font-size:15px;
+color:#000;
+}
+.delimiter{
+	background-color: #8AADC9;
 }

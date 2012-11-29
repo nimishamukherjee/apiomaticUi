@@ -38,10 +38,8 @@
 					<thead>
 						<tr>
 							<th style="width: 20%">Name</th>
-							<th style="width: 15%">Base URL</th>
-							<th style="width: 10%">Documentation</th>
-							<th style="width: 15%">Service Description URL</th>
-							<th style="width: 40%">Class</th>
+							<th style="width: 20%">Base URL</th>
+							<th style="width: 60%">Documentation</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -49,8 +47,6 @@
 							<td class="name"><a href="#"></a></td>
 							<td class="baseURL"></td>
 							<td class="documentation"></td>
-							<td class="serviceurl"></td>
-							<td class="class"></td>
 						</tr>
 					</tbody>
 				</table>				
@@ -61,105 +57,118 @@
 		<!--Api Description-->
 		<div class="container hide" id="apiDisplay">
 			<div class="row-fluid">
-				<div class="span10"><h3 class="muted" id="apititle">API Description for</h3></div>
-				<div class="span2 pull-right pagination-right"><a href="#" onclick="javascript:fnDisplayService();">View Services</a></div>
+				<div class="span10"><h4 class="muted" id="apititle">API Description for </h4></div>
+				<div class="span2 pull-right pagination-right"><a href="#" onclick="javascript:fnDisplayService();">View Services</a></div>				
 			</div>
-			<hr />		
+			<hr />
 			<div class="table-header well">About</div>
-			<table class="table table-bordered" id="apiTable">				
+			<table class="table table-bordered" id="apiTable">
+				<thead>
+					<td style="width:20%"></td>
+					<td style="width:80%"></td>
+				</thead>			
 				<tbody>					
 					<tr> 
-						<td>urls:</td>
+						<td>Url</td>
 						<td id="mainurl"></td>
 					</tr>
+					<tr class="rowdoc"> 
+						<td>Documentation</td>
+						<td class="controllerdoc"></td>
+					</tr>
 					<tr> 
-						<td class="text">packageName</td>
+						<td>Package Name</td>
 						<td id="packageName"></td>
 					</tr>
 				</tbody>
 			</table>
 			<div class="table-header well">Method</div>
 			<table class="table table-bordered" id="methodTemplate">
-				<tbody>				
-					<tr>
-						<td class="label_td">Consumes</td> 
-						<td class="consumes"></td>
-					</tr>
-					<tr>
-						<td>Header</td> <td class="headers"></td>
-					</tr>
-					<tr>
-						<td>Produces</td> <td class="produces"></td>
-					</tr>
-					<tr>
-						<td>URL</td><td class="urls"></td>
-					</tr>
-					<tr>
-						<td>Body</td><td class="body"></td>
-					</tr>
-					<tr>
-						<td>Params</td><td class="params"></td>
-					</tr>
-					<tr>
-						<td>Methods</td><td class="methods"></td>
-					</tr>					
-					<tr>
-						<td>Response</td>
-						<td>
-							<tr>
-								<td>-->Type</td>
-								<td class="response"></td>
-							</tr>
-						</td>
-					</tr>
-					<tr>
-						<td>*********************************</td>
-						<td>*********************************</td>
-					</tr>
-				</tbody>
-			</table>
-			<div class="table-header well">Type Definition</div>
-				<table class="table table-bordered td" id="typeDefinition">
-					<thead>
+			<thead>
 						<td style="width:20%"></td>
 						<td style="width:80%"></td>
-					</thead>
-					<tbody>
+				</thead>
+				<tbody>	
+					<tr class="rowurls">
+						<td>URL</td><td class="urls"></td>
+					</tr>				
+					<tr class="rowdoc">
+						<td>Documentation</td><td class="documentation"></td>
+					</tr>									
+					<tr class="rowconsumes">
+						<td>Consumes</td> 
+						<td class="consumes" id="consumesVal"></td>
+					</tr>
+					<tr class="rowproduces">
+						<td>Produces</td> <td class="produces"></td>
+					</tr>
+					<tr class="rowheaders">
+						<td>Header</td> <td class="headers"></td>
+					</tr>
+					<tr class="rowparams">
+						<td>Params</td><td class="params"></td>
+					</tr>
+					<tr class="rowmethods">
+						<td>Methods</td><td class="methods"></td>
+					</tr>
+					<tr class="rowbody">
+						<td>Body</td><td class="body"></td>
+					</tr>
+					<tr class="rowresponse">
+						<td>Response</td>
+						<td class="response"></td>						
+					</tr>
+					<tr>
+						<td class="delimiter"></td>
+						<td class="delimiter"></td>
+					</tr>
+				</tbody>
+			</table>			
+			<div class="table-header well">Type Definition</div>
+				<table class="table table-bordered" id="typeDefinition">	
+					<tbody>					
 						<tr>
-							<td>type</td> <td class="type"></td>
+							<td class="type muted"><b></b></td>
+							<tr>New</tr>
 						</tr>
-						<tr>
+						<tr class="rowdoc">
+							<td>Documentation</td>
+							<td class="doc"></td>
+						</tr>
+						<tr class="rowproperties">
 							<td>Property</td>
-							<td class="proType">
-								<table>
-									<tr>
-										<td>Name</td> 
-										<td>Type</td>
-									</tr>
-									<tr class="properties">
-										<td class="name"></td>
-										<td class="type"></td>
-										<td class="additional" style="border-top:none"></td>
-									</tr>
-								</table>						
+								<td class="proType">
+									<table>
+										<tr>
+											<td><strong>Name</strong></td> 
+											<td><strong>Type</strong></td>
+										</tr>
+										<tr class="properties">
+											<td class="name"></td>
+											<td class="type"></td>
+											<td class="additional"></td>
+										</tr>
+									</table>						
 							</td>					
 						</tr>
-						<tr>
-							<td>subclasses</td> 
-							<td>
-								<tr>
-									<td class="subclasses"></td>
-								</tr>
-							</td>
-						</tr>
-						<tr>
-							<td>abstractClass</td><td class="abstractClass"></td>
-						</tr>
-						<td>*********************************</td>
-						<td>*********************************</td>
-					</tbody>
-				</table>
-			
+							<tr class="rowsubclasses">
+								<td>subclasses</td> 
+								<td>
+									<tr>
+										<td class="subclasses"></td>
+									</tr>
+								</td>
+							</tr>
+							<tr class="rowabstract">
+								<td>abstractClass</td>
+								<td class="abstractClass"></td>
+							</tr>
+							<tr>
+								<td class="delimiter"></td>
+								<td class="delimiter"></td>
+							</tr>
+						</tbody>
+				</table>			
 		</div>
 		<!--/container-->
 		<!--Api Description End-->
@@ -169,6 +178,7 @@
 		<!-- /container --><!-- Le javascript ================================================== --><!-- Placed at the end of the document so the pages load faster -->
 		<script src="js/jquery.js"></script>
 		<script src="js/bootstrap.js"></script>
+		<script src="js/bootstrap-collapse.js"></script>
 		<script src="js/pure.js"></script>
 		<script src="js/index.js"></script>
 
