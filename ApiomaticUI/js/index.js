@@ -1,7 +1,27 @@
 var services;
 var baseURL="data/"
 var ext=".json"
+//Search function
+function fnSearchAndFilter()
+{
+	$("#search-query").keyup(function(){
+		$("#services-table").find("tr").hide();
+		var data = this.value.split(" ");
+		var jo = $("#services-table").find("tr");
+		$.each(data, function(i, v)
+		{
+			jo = jo.filter(function(index){
+				return ($(this).children(":first").text().indexOf(data)==0);
+			});
+		});
+		jo.show();
+	}).focus(function(){
+		  this.value="";
+		  $(this).css({"color":"black"});
+		  $(this).unbind('focus');
+	}).css({"color":"#C0C0C0"});
 
+}
 //function to return the type + href for methods
 function fnReturnType(obj){
 	for(i in obj){
@@ -207,6 +227,7 @@ $(document).ready(function() {
 		var jsObj = null;
 		jsObj = {"services":json};
 		$('table#services-table').render(jsObj, directive);
+		fnSearchAndFilter();
 		//define the click function
 		$('td.name a').click(function(){
 			var callUrl = $(this).html();
