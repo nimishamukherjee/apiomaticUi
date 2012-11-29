@@ -140,7 +140,7 @@ function fnDisplayApiDetails(url){
 						},
 						"tr td.name div.alert": function(arg){
 							if(arg.item.optional==false || arg.item.optional=="false"){
-								return arg.item.requiredValue;
+								return "Required value:" + arg.item.requiredValue;
 							}else{
 								return "";
 							}
@@ -178,7 +178,16 @@ function fnDisplayApiDetails(url){
 		$('table#apiTable').render(json, directive);
 		//var rfn = $('table#methodTemplate').compile( directiveMethod )		
 		$('table#methodTemplate').render(json, directiveMethod);
-		$('div#typeDefinition').render(json, directiveMD);		
+		$('div#typeDefinition').render(json, directiveMD);	
+		//define hover for required
+		$(".required").hover(
+			function () {
+				$(this).next().removeClass('hide');
+			},
+			function () {
+				$(this).next().addClass('hide');
+			}
+);
 	});
 }
 

@@ -70,3 +70,9 @@ color:#000;
 	color: red;
 	font-size: 1.5em;	
 }
+.alert{
+	position: absolute;
+	margin-top:-10%;
+	background-color: #ebebeb;
+	color: #000000;	
+}
