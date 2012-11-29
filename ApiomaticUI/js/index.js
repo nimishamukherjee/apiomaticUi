@@ -22,6 +22,7 @@ function fnSearchAndFilter()
 	}).css({"color":"#C0C0C0"});
 
 }
+
 //function to return the type + href for methods
 function fnReturnType(obj){
 	for(i in obj){
@@ -117,8 +118,21 @@ function fnDisplayApiDetails(url){
 	directiveMD={
 		'div.repdiv':{
 			'method<-typeDefinitions':{
-				'div.type b':"#{method.type}",
-				"div.type@id":"#{method.type}",								
+				'div.type b a':function(arg){
+					if(arg.item.abstractClass==true || arg.item.abstractClass=="true"){
+						return (arg.item.type+" [ABSTRACT]");
+					}else{
+						return (arg.item.type);
+					}
+				},
+				'div.type b a@href+':function(arg){
+					return (arg.item.type);
+				},
+				"div.type@id":"#{method.type}",
+				"div.pane@style":function(arg){
+					return ('display:none');
+				},
+														
 				'table tr td.doc':"#{method.documentation}",
 				'table tr.rowdoc@class':function(arg){
 					return (arg.item.documentation=="" || arg.item.documentation==undefined) ? "hide" : "";
@@ -180,7 +194,6 @@ function fnDisplayApiDetails(url){
 						}
 					}				
 					return str;
-					//"<a href=\"#"+arg.item.type+"\">"+arg.item.type+"</a>"
 				},
 				'table tr.rowsub@class':function(arg){
 					return (arg.item.subclasses=="") ? "hide" : "";
@@ -196,10 +209,8 @@ function fnDisplayApiDetails(url){
 	var pathUrl = baseURL+url+ext;
 	$.getJSON(pathUrl, function(json) {
 		$('table#apiTable').render(json, directive);
-		//var rfn = $('table#methodTemplate').compile( directiveMethod )		
 		$('table#methodTemplate').render(json, directiveMethod);
 		$('div#typeDefinition').render(json, directiveMD);	
-		//define hover for required
 		$(".required").hover(
 			function () {
 				$(this).next().removeClass('hide');
@@ -207,7 +218,10 @@ function fnDisplayApiDetails(url){
 			function () {
 				$(this).next().addClass('hide');
 			}
-);
+		);
+		$(".type").click(function(){
+			$(this).next().toggle();
+		});
 	});
 }
 
