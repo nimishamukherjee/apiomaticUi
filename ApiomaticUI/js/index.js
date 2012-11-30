@@ -95,7 +95,7 @@ function fnDisplayApiDetails(url){
 				'tr.rowdoc@class':function(arg){
 					return (arg.item.documentation=="" || arg.item.documentation==undefined) ? "hide" : "";
 				},
-				'tr td.body' : function(arg){
+				'tr td.apibody' : function(arg){
 					return (fnReturnType(arg.item.body))
 				},
 				'tr.rowbody@class':function(arg){
@@ -219,6 +219,7 @@ function fnDisplayApiDetails(url){
 			$(window.location.hash).ScrollTo();
 			//Expand the type definition
 			$(window.location.hash).next().css("display","block");
+			$(window.location.hash).removeClass('expandimg').addClass('collapseimg')
 			//Remove #id from the URL
 			serviceName = serviceName.substring(0,serviceName.indexOf("#"));			
 		}
@@ -235,22 +236,32 @@ function fnDisplayApiDetails(url){
 		);
 		//Expand/collapse for type definition
 		$(".type").click(function(){
-			$(this).next().toggle();
+			$(this).next().toggle(function(){
+				if($(this).prev().hasClass('expandimg')){
+					$(this).prev().removeClass('expandimg').addClass('collapseimg');
+				}else{
+					$(this).prev().removeClass('collapseimg').addClass('expandimg');
+				}
+			});
 		});
 		//On click expand the type definition
 		$("table#methodTemplate tr td a[href]").click(function(e){
 			var targetID = $(e.target).attr('href').replace(/\./g,"-");
 			$(targetID).next().css("display","block");
+			$(targetID).removeClass('expandimg').addClass('collapseimg');
 		})
 		//Type definition properties
 		$("tr.properties td a[href]").click(function(e){
 			var targetID = $(e.target).attr('href').replace(/\./g,"-");
 			$(targetID).next().css("display","block");
+			$(targetID).removeClass('expandimg').addClass('collapseimg')
 		})
 		//Type definition subclass
 		$("table#typeTemplate tr td a[href]").click(function(e){
 			var targetID = $(e.target).attr('href').replace(/\./g,"-");
 			$(targetID).next().css("display","block");
+			$(targetID).removeClass('expandimg').addClass('collapseimg')
+			//
 		})
 	});
 }

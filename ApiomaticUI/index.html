@@ -14,6 +14,7 @@
 		<link rel="apple-touch-icon-precomposed" href="pages/ico/apple-touch-icon-57-precomposed.png">
 	</head>
 	<body>
+
 		<div class="navbar">
 			<div id="banner">
 				<div id="logo-bar">
@@ -90,45 +91,42 @@
 				</thead>
 				<tbody>	
 					<tr class="rowurls">
-						<td class="urls"><a href="#"></a></td>
+						<td colspan="2" class="urls url_header"><a href="#"></a></td>
 					</tr>				
 					<tr class="rowdoc">
 						<td>Documentation</td><td class="documentation"></td>
 					</tr>									
 					<tr class="rowconsumes">
-						<td>Consumes</td> 
+						<td class="txt_label">Consumes</td> 
 						<td class="consumes" id="consumesVal"></td>
 					</tr>
 					<tr class="rowproduces">
-						<td>Produces</td> <td class="produces"></td>
+						<td class="txt_label">Produces</td> <td class="produces"></td>
 					</tr>
 					<tr class="rowheaders">
-						<td>Header</td> <td class="headers"></td>
+						<td class="txt_label">Header</td> <td class="headers"></td>
 					</tr>
 					<tr class="rowparams">
-						<td>Params</td><td class="params"></td>
+						<td class="txt_label">Params</td><td class="params"></td>
 					</tr>
 					<tr class="rowmethods">
-						<td>Methods</td><td class="methods"></td>
+						<td class="txt_label">Methods</td><td class="methods"></td>
 					</tr>
 					<tr class="rowbody">
-						<td>Body</td><td class="body"></td>
+						<td class="txt_label">Body</td><td class="apibody"></td>
 					</tr>
 					<tr class="rowresponse">
-						<td>Response</td>
+						<td class="txt_label">Response</td>
 						<td class="response"></td>						
-					</tr>
-					<tr>
-						<td class="delimiter"></td>
-						<td class="delimiter"></td>
 					</tr>
 				</tbody>
 			</table>			
 			<div class="table-header well">Type Definition</div>
+
 			<div id="typeDefinition">
-				<div class="repdiv">
-					<div class="type"><b><a class="muted" href="#"></a></b></div>
-					<div class="pane">
+			<div class="repdiv">
+				 <div id="btn-div" class="type button expand expandimg"><b><a class="muted" href="#"></a></b></div>
+					<div class="pane" id="content-div">
 					<table class="table table-bordered" id="typeTemplate">
 						<tr class="rowdoc">
 							<td style="width: 20%">Documentation</td>
@@ -154,8 +152,8 @@
 							<td style="width: 80%" class="subclass"></td>
 						</tr>						
 						<tr>
-								<td class="delimiter"></td>
-								<td class="delimiter"></td>
+								<td height="2%" class="delimiter"></td>
+								<td height="2%" class="delimiter"></td>
 							</tr>
 					</table>
 					</div>
