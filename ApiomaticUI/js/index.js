@@ -1,5 +1,5 @@
 var services;
-var jsonPath="http://control.qa.intercloud.net:8080/Orchestration/services/"
+var jsonPath="http://control.hrvatski.intercloud.net:8080/Orchestration/services/"
 var currentUrl = $(location).attr('href');
 var serviceName="";
 //Search function
@@ -36,15 +36,15 @@ function fnReturnType(obj){
 				for(j in obj){
 					if(j=="nestedType"){
 						var ref = obj[j];
-						for(k in ref){
-							return ("Type is an array of <a href=\"#"+ref[k]+"\">"+ref[k]+"</a>");
+						for(k in ref){							
+							return ("Type is an array of <a href=\"#"+ref[k].replace(/\./g,"-")+"\">"+ref[k]+"</a>");
 						}
 					}
 				}
 				
 			break;
 			default:
-				return("Type is <a href=\"#"+obj[i]+"\">"+ obj[i]+"</a>");
+				return("Type is <a href=\"#"+obj[i].replace(/\./g,"-")+"\">"+ obj[i]+"</a>");
 			break;
 		}
 		
@@ -60,7 +60,7 @@ function fnDisplayApiDetails(url){
 	$("#indexdisplay").addClass("hide");
 	$("#apiDisplay").removeClass("hide");
 	
-
+	//Controller
 	var directive = {
 		'td#mainurl':'urls',		
 		'td#packageName':'packageName',
@@ -69,6 +69,7 @@ function fnDisplayApiDetails(url){
 			return (arg.documentation =="" || arg.documentation ==undefined) ? "hide" : "";
 		}
 	}
+	//Method
 	directiveMethod = {
 		'tbody':{
 			'method<-methods':{
@@ -118,6 +119,7 @@ function fnDisplayApiDetails(url){
 			}
 		}
 	};
+	//Type Definition
 	directiveMD={
 		'div.repdiv':{
 			'method<-typeDefinitions':{
@@ -129,11 +131,13 @@ function fnDisplayApiDetails(url){
 					}
 				},
 				'div.type b a@href+':function(arg){
-					return (arg.item.type);
+					return ((arg.item.type).replace(/\./g,"-"));
 				},
-				"div.type@id":"#{method.type}",
+				"div.type@id":function(arg){
+					return (arg.item.type).replace(/\./g,"-");
+				},
 				"div.pane@style":function(arg){
-					return ('display:none');
+					return ('display:block');
 				},
 														
 				'table tr td.doc':"#{method.documentation}",
@@ -154,7 +158,7 @@ function fnDisplayApiDetails(url){
 											if(j=="nestedType"){
 												var ref = refObj[j];
 												for(k in ref){
-													return ("Array of <a href=\"#"+ref[k]+"\">"+ref[k]+"</a>");
+													return ("Array of <a href=\"#"+ref[k].replace(/\./g,"-")+"\">"+ref[k]+"</a>");
 												}}}			
 								break;
 								case "string":
@@ -163,7 +167,7 @@ function fnDisplayApiDetails(url){
 									return (arg.item.type);
 								break;
 								default:
-									return ("<a href=\"#"+arg.item.type+"\">"+arg.item.type+"</a>");
+									return ("<a href=\"#"+(arg.item.type).replace(/\./g,"-")+"\">"+arg.item.type+"</a>");
 								break;
 							}
 						},
@@ -192,7 +196,7 @@ function fnDisplayApiDetails(url){
 						for(j in obj ){
 							var ref = obj[j];
 							for(k in ref){
-								str += "<a href=\"#"+ref[k]+"\">"+ref[k]+"</a>, ";
+								str += "<a href=\"#"+ref[k].replace(/\./g,"-")+"\">"+ref[k]+"</a>, ";
 							}
 						}
 					}				
@@ -209,15 +213,19 @@ function fnDisplayApiDetails(url){
 			}
 		}
 	};	
+	//Load the api json
 	$.getJSON(url, function(json) {
 		$('table#apiTable').render(json, directive);
 		$('table#methodTemplate').render(json, directiveMethod);
 		$('div#typeDefinition').render(json, directiveMD);
 		if(serviceName.indexOf("#")>=0){
-			var anchor = (serviceName.substring(serviceName.indexOf("#"),serviceName.length));
+			$(window.location.hash).ScrollTo();
+			//Remove #id from the URL
 			serviceName = serviceName.substring(0,serviceName.indexOf("#"));			
-		}	
-		$("#apititle").append(serviceName);	
+		}
+		//API for ...
+		$("#apititle").append(serviceName);
+		//Hover for !	
 		$(".required").hover(
 			function () {
 				$(this).next().removeClass('hide');
@@ -226,6 +234,7 @@ function fnDisplayApiDetails(url){
 				$(this).next().addClass('hide');
 			}
 		);
+		//Expand/collapse for type definition
 		$(".type").click(function(){
 			$(this).next().toggle();
 		});
