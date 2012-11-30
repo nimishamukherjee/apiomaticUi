@@ -26,7 +26,7 @@
 			</div>
 		</div>
 		<div class="container" id="indexdisplay">
-			<h3 class="muted">Services List</h3>
+			<h4 class="muted">Services List</h4>
 			<!--Search Form-->
 			<form class="form-search">
 				<div class="input-append">
@@ -58,37 +58,18 @@
 		<!--Api Description-->
 		<div class="container hide" id="apiDisplay">
 			<div class="row-fluid">
-				<div class="span10"><h4 class="muted" id="apititle">API Description for </h4></div>
+				<div class="span10"><span>API Description for <b class="muted" id="apititle"></b></span></div>
 				<div class="span2 pull-right pagination-right"><a href="#" onclick="javascript:fnDisplayService();">View Services</a></div>				
 			</div>
-			<hr />
-			<div class="table-header well">About</div>
-			<table class="table table-bordered" id="apiTable">
-				<thead>
-					<td style="width:20%"></td>
-					<td style="width:80%"></td>
-				</thead>			
-				<tbody>					
-					<tr> 
-						<td>Url</td>
-						<td id="mainurl"></td>
-					</tr>
-					<tr class="rowdoc"> 
-						<td>Documentation</td>
-						<td class="controllerdoc"></td>
-					</tr>
-					<tr> 
-						<td>Package Name</td>
-						<td id="packageName"></td>
-					</tr>
-				</tbody>
-			</table>
-			<div class="table-header well">Method</div>
-			<table class="table table-bordered" id="methodTemplate">
-			<thead>
-						<td style="width:20%"></td>
-						<td style="width:80%"></td>
-				</thead>
+			<div class="row-fluid" id="apiTable">
+				<div id="mainurl"><b></b></div>
+				<br />
+				<div id="controllerdoc">Note on the service</div>
+			</div>
+			<div class="table-header well">Method  summary</div>
+
+			<table class="table" id="methodTemplate">
+				<thead><td style="width:10%"></td><td style="width:90%"></td></thead>
 				<tbody>	
 					<tr class="rowurls">
 						<td colspan="2" class="urls url_header"><a href="#"></a></td>
@@ -120,44 +101,46 @@
 						<td class="response"></td>						
 					</tr>
 				</tbody>
-			</table>			
-			<div class="table-header well">Type Definition</div>
-
+				
+			</table>	
+			<br />
+			<div class="table-header well">Type Definitions</div>
+			<br />
 			<div id="typeDefinition">
-			<div class="repdiv">
-				 <div id="btn-div" class="type button expand expandimg"><b><a class="muted" href="#"></a></b></div>
+				<div class="repdiv">
+					<div id="btn-div" class="type button expand expandimg"><b><a class="muted" href="#"></a></b></div>
 					<div class="pane" id="content-div">
-					<table class="table table-bordered" id="typeTemplate">
-						<tr class="rowdoc">
-							<td style="width: 20%">Documentation</td>
-							<td style="width: 80%" class="doc"></td>
-						</tr>
-						<tr class="rowprops">
-							<td style="width: 20%">Property</td>
-							<td style="width: 80%">
-								<table>
-									<tr>
-										<td><strong>Name</strong></td> 
-										<td><strong>Type</strong></td>
-									</tr>
-									<tr class="properties">										
-										<td class="name"><span class="required">! </span><div class="alert hide"></div></td>									
-										<td class="type"></td>
-									</tr>
-								</table>
-							</td>
-						</tr>
-						<tr class="rowsub">
-							<td style="width: 20%">Subclass</td>
-							<td style="width: 80%" class="subclass"></td>
-						</tr>						
-						<tr>
-								<td height="2%" class="delimiter"></td>
-								<td height="2%" class="delimiter"></td>
+						<table class="table table-bordered" id="typeTemplate">
+							<tr class="rowdoc">
+								<td style="width: 20%">Documentation</td>
+								<td style="width: 80%" class="doc"></td>
 							</tr>
-					</table>
-					</div>
-			</div>	
+							<tr class="rowprops">
+								<td style="width: 20%">Property</td>
+								<td style="width: 80%">
+									<table>
+										<tr>
+											<td><strong>Name</strong></td> 
+											<td><strong>Type</strong></td>
+										</tr>
+										<tr class="properties">										
+											<td class="name"><span class="required">! </span><div class="alert hide"></div></td>									
+											<td class="type"></td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr class="rowsub">
+								<td style="width: 20%">Subclass</td>
+								<td style="width: 80%" class="subclass"></td>
+							</tr>						
+							<tr>
+								<td height="2%" class="delimiter"><br /></td>
+								<td height="2%" class="delimiter"><br /></td>
+							</tr>
+						</table>
+					</div>				
+				</div>		
 		</div>
 		</div>
 		<!--/container-->

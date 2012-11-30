@@ -2,6 +2,7 @@ var services;
 var jsonPath="http://control.hrvatski.intercloud.net:8080/Orchestration/services/"
 var currentUrl = $(location).attr('href');
 var serviceName="";
+var mainUrl=""
 //Search function
 function fnSearchAndFilter()
 {
@@ -62,12 +63,8 @@ function fnDisplayApiDetails(url){
 	
 	//Controller
 	var directive = {
-		'td#mainurl':'urls',		
-		'td#packageName':'packageName',
-		'td.controllerdoc':'documentation',
-		'tr.rowdoc@class':function(arg){
-			return (arg.documentation =="" || arg.documentation ==undefined) ? "hide" : "";
-		}
+		'div#mainurl b':'urls',		
+		'div#controllerdoc':'documentation',
 	}
 	//Method
 	directiveMethod = {
@@ -85,12 +82,14 @@ function fnDisplayApiDetails(url){
 				'tr.rowproduces@class':function(arg){
 					return arg.item.produces=="" ? "hide" : "";
 				},			
-				'tr td.urls a': "#{method.urls}",
-				'tr td.urls a@href+': "#{method.urls}",
-				'tr td.urls@id': "#{method.urls}",
-				'tr.rowurls@class':function(arg){
-					return arg.item.urls=="" ? "hide" : "";
+				'tr td.urls a': function(arg){
+					return (mainUrl+arg.item.urls);
 				},
+				'tr td.urls a@href+': "#{method.urls}",
+				'tr td.urls@id': function(arg){
+					return (mainUrl+arg.item.urls);
+				},
+				
 				'tr td.documentation': "#{method.documentation}",
 				'tr.rowdoc@class':function(arg){
 					return (arg.item.documentation=="" || arg.item.documentation==undefined) ? "hide" : "";
@@ -211,7 +210,10 @@ function fnDisplayApiDetails(url){
 	};	
 	//Load the api json
 	$.getJSON(url, function(json) {
-		$('table#apiTable').render(json, directive);
+		$('div#apiTable').render(json, directive);
+		if(json.urls != undefined){
+			mainUrl = json.urls;
+		}
 		$('table#methodTemplate').render(json, directiveMethod);
 		$('div#typeDefinition').render(json, directiveMD);
 		if(serviceName.indexOf("#")>=0){
@@ -224,7 +226,7 @@ function fnDisplayApiDetails(url){
 			serviceName = serviceName.substring(0,serviceName.indexOf("#"));			
 		}
 		//API for ...
-		$("#apititle").append(serviceName);
+		$("#apititle").html(serviceName);
 		//Hover for !	
 		$(".required").hover(
 			function () {
@@ -236,7 +238,7 @@ function fnDisplayApiDetails(url){
 		);
 		//Expand/collapse for type definition
 		$(".type").click(function(){
-			$(this).next().toggle(function(){
+			$(this).next().toggle(100, function(){
 				if($(this).prev().hasClass('expandimg')){
 					$(this).prev().removeClass('expandimg').addClass('collapseimg');
 				}else{
