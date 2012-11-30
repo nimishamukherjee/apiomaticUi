@@ -79,3 +79,7 @@ color:#000;
     position: absolute;
     padding: 5px;
 }
+a{
+	cursor:pointer;
+}
+

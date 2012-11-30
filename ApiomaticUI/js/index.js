@@ -36,7 +36,7 @@ function fnReturnType(obj){
 				for(j in obj){
 					if(j=="nestedType"){
 						var ref = obj[j];
-						for(k in ref){							
+						for(k in ref){						
 							return ("Type is an array of <a href=\"#"+ref[k].replace(/\./g,"-")+"\">"+ref[k]+"</a>");
 						}
 					}
@@ -205,11 +205,7 @@ function fnDisplayApiDetails(url){
 				'table tr.rowsub@class':function(arg){
 					return (arg.item.subclasses=="") ? "hide" : "";
 					
-				},
-				'table tr td.abstract':"#{method.abstractClass}",
-				'table tr.rowabstract@class':function(arg){
-					return (arg.item.abstractClass=="" || arg.item.abstractClass==undefined) ? "hide" : "";
-				}
+				}			
 			}
 		}
 	};	
@@ -242,13 +238,22 @@ function fnDisplayApiDetails(url){
 			$(this).next().toggle();
 		});
 		//On click expand the type definition
-		$("table#methodTemplate tr td.response a[href]").click(function(e){
+		$("table#methodTemplate tr td a[href]").click(function(e){
+			var targetID = $(e.target).attr('href').replace(/\./g,"-");
+			$(targetID).next().css("display","block");
+		})
+		//Type definition properties
+		$("tr.properties td a[href]").click(function(e){
+			var targetID = $(e.target).attr('href').replace(/\./g,"-");
+			$(targetID).next().css("display","block");
+		})
+		//Type definition subclass
+		$("table#typeTemplate tr td a[href]").click(function(e){
 			var targetID = $(e.target).attr('href').replace(/\./g,"-");
 			$(targetID).next().css("display","block");
 		})
 	});
 }
-
 
 $(document).ready(function() {
 	//check the url for ?controller
