@@ -137,7 +137,7 @@ function fnDisplayApiDetails(url){
 					return (arg.item.type).replace(/\./g,"-");
 				},
 				"div.pane@style":function(arg){
-					return ('display:block');
+					return ('display:none');
 				},
 														
 				'table tr td.doc':"#{method.documentation}",
@@ -219,7 +219,10 @@ function fnDisplayApiDetails(url){
 		$('table#methodTemplate').render(json, directiveMethod);
 		$('div#typeDefinition').render(json, directiveMD);
 		if(serviceName.indexOf("#")>=0){
+			//scroll to the type definition
 			$(window.location.hash).ScrollTo();
+			//Expand the type definition
+			$(window.location.hash).next().css("display","block");
 			//Remove #id from the URL
 			serviceName = serviceName.substring(0,serviceName.indexOf("#"));			
 		}
@@ -238,6 +241,11 @@ function fnDisplayApiDetails(url){
 		$(".type").click(function(){
 			$(this).next().toggle();
 		});
+		//On click expand the type definition
+		$("table#methodTemplate tr td.response a[href]").click(function(e){
+			var targetID = $(e.target).attr('href').replace(/\./g,"-");
+			$(targetID).next().css("display","block");
+		})
 	});
 }
 
