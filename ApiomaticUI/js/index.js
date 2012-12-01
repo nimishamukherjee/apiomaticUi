@@ -37,8 +37,12 @@ function fnReturnType(obj){
 				for(j in obj){
 					if(j=="nestedType"){
 						var ref = obj[j];
-						for(k in ref){						
-							return ("Type is an array of <a href=\"#"+ref[k].replace(/\./g,"-")+"\">"+ref[k]+"</a>");
+						for(k in ref){	
+							if(ref[k].indexOf("com")>=0){					
+								return ("Type is an array of <a href=\"#"+ref[k].replace(/\./g,"-")+"\">"+ref[k]+"</a>");
+							}else{
+								return ("Type is an array of "+ref[k]);
+							}
 						}
 					}
 				}
@@ -147,30 +151,29 @@ function fnDisplayApiDetails(url){
 					return (arg.item.properties=="" || arg.item.properties==undefined) ? "hide" : "";
 				},
 				'table tr.properties':{
-					"property <- method.properties" : {
-						"td.type": function(arg){
+					"property <- method.properties" : {						
+						"tr td.name+":function(arg){
 							switch(arg.item.type)
 							{
+								case "string":
+								case "int":
+								case "boolean":
+									return ("<b>"+arg.item.name+"</b> is of type "+arg.item.type);
+								break;
 								case "array": 
 									var refObj = arg.item;
 										for(j in refObj){
 											if(j=="nestedType"){
 												var ref = refObj[j];
 												for(k in ref){
-													return ("Array of <a href=\"#"+ref[k].replace(/\./g,"-")+"\">"+ref[k]+"</a>");
+													return ("<b>"+ arg.item.name+"</b> is of  type "+"Array of <a href=\"#"+ref[k].replace(/\./g,"-")+"\">"+ref[k]+"</a>");
 												}}}			
 								break;
-								case "string":
-								case "int":
-								case "boolean":
-									return (arg.item.type);
-								break;
 								default:
-									return ("<a href=\"#"+(arg.item.type).replace(/\./g,"-")+"\">"+arg.item.type+"</a>");
+									return ("<b>"+arg.item.name+"</b> is of type "+"<a href=\"#"+(arg.item.type).replace(/\./g,"-")+"\">"+arg.item.type+"</a>");
 								break;
 							}
 						},
-						"tr td.name+":"#{property.name}",
 						"tr td.name span.required@class":function(arg){
 							if(arg.item.optional==false || arg.item.optional=="false"){
 								return "required";
