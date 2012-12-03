@@ -89,9 +89,11 @@ function fnDisplayApiDetails(url){
 				'tr td.urls a': function(arg){
 					return (mainUrl+arg.item.urls);
 				},
-				'tr td.urls a@href+': "#{method.urls}",
+				'tr td.urls a@href+': function(arg){
+					return(String(arg.item.urls)).replace(/\{/g,"-").replace(/\}/g,"-").replace(/\//g,"-").replace(/\--/g,"-");					
+				},
 				'tr td.urls@id': function(arg){
-					return (mainUrl+arg.item.urls);
+					return(String(arg.item.urls)).replace(/\{/g,"-").replace(/\}/g,"-").replace(/\//g,"-").replace(/\--/g,"-");
 				},
 				
 				'tr td.documentation': "#{method.documentation}",
@@ -224,7 +226,9 @@ function fnDisplayApiDetails(url){
 			$(window.location.hash).ScrollTo();
 			//Expand the type definition
 			$(window.location.hash).next().css("display","block");
-			$(window.location.hash).removeClass('expandimg').addClass('collapseimg')
+			if(!($(window.location.hash).parent().hasClass("rowurls"))){
+				$(window.location.hash).removeClass('expandimg').addClass('collapseimg')
+			}
 			//Remove #id from the URL
 			serviceName = serviceName.substring(0,serviceName.indexOf("#"));			
 		}
@@ -253,20 +257,21 @@ function fnDisplayApiDetails(url){
 		$("table#methodTemplate tr td a[href]").click(function(e){
 			var targetID = $(e.target).attr('href').replace(/\./g,"-");
 			$(targetID).next().css("display","block");
-			$(targetID).removeClass('expandimg').addClass('collapseimg');
+			if(!($(targetID).parent().hasClass("rowurls"))){
+				$(targetID).removeClass('expandimg').addClass('collapseimg');
+			}
 		})
 		//Type definition properties
 		$("tr.properties td a[href]").click(function(e){
 			var targetID = $(e.target).attr('href').replace(/\./g,"-");
 			$(targetID).next().css("display","block");
-			$(targetID).removeClass('expandimg').addClass('collapseimg')
+			$(targetID).removeClass('expandimg').addClass('collapseimg');
 		})
 		//Type definition subclass
 		$("table#typeTemplate tr td a[href]").click(function(e){
 			var targetID = $(e.target).attr('href').replace(/\./g,"-");
 			$(targetID).next().css("display","block");
 			$(targetID).removeClass('expandimg').addClass('collapseimg')
-			//
 		})
 	});
 }

@@ -38,7 +38,7 @@ a:hover{ cursor:pointer; color:#000;}
 	border: 0px;
 	border-radius: 0px;
 }
-.table tbody + tbody{ border-top: 1px solid #dddddd; border-bottom: 1px solid #dddddd;}
+.table tbody + tbody{ border-top: 1px solid #dddddd; border-bottom: 1px solid #dddddd; }
 
 /*Custom*/
 .services > table > thead{ background-color: #4b6dc1; color: #FFF;}
@@ -65,4 +65,4 @@ table#methodTemplate tr{
 }
 table#methodTemplate .urls a{
 	font-weight: bold;
-}	
+}
