@@ -1,0 +1,844 @@
+{
+    "urls": [
+        "/account"
+    ],
+    "documentation": "Account Controller provides rest api's for CRUD(create, retrieve, update and delete) operations for Accounts, Orders(Physical/Rac), Users and ProviderNetworks.",
+    "packageName": "com.cpn.vsp.orchestration.account",
+    "methods": [
+        {
+            "consumes": [],
+            "headers": [],
+            "produces": [],
+            "urls": [
+                "/{aid}/user/{uid}"
+            ],
+            "documentation": "Api update an user for given user id and account id.",
+            "methods": [
+                "PUT"
+            ],
+            "params": [],
+            "body": {
+                "type": "com.cpn.vsp.orchestration.user.User"
+            },
+            "response": {
+                "type": "com.cpn.vsp.orchestration.user.User"
+            }
+        },
+        {
+            "consumes": [],
+            "headers": [],
+            "produces": [],
+            "urls": [
+                "/{aid}/user"
+            ],
+            "documentation": "Api update an user for given user id and account id.",
+            "methods": [
+                "POST"
+            ],
+            "params": [],
+            "body": {
+                "type": "com.cpn.vsp.orchestration.user.User"
+            },
+            "response": {
+                "type": "com.cpn.vsp.orchestration.user.User"
+            }
+        },
+        {
+            "consumes": [],
+            "headers": [],
+            "produces": [],
+            "urls": [
+                "/{aid}"
+            ],
+            "documentation": "Api retrieve an account details for a given account id. Refer Account type for more details.",
+            "methods": [
+                "GET"
+            ],
+            "params": [],
+            "response": {
+                "type": "com.cpn.vsp.orchestration.account.Account"
+            }
+        },
+        {
+            "consumes": [],
+            "headers": [],
+            "produces": [],
+            "urls": [
+                "/{anAccountId}/user"
+            ],
+            "documentation": "Api retrieves list of users associated with an account.",
+            "methods": [
+                "GET"
+            ],
+            "params": [],
+            "response": {
+                "type": "array",
+                "nestedType": {
+                    "type": "com.cpn.vsp.orchestration.user.User"
+                }
+            }
+        },
+        {
+            "consumes": [
+                "application/json",
+                "application/xml"
+            ],
+            "headers": [],
+            "produces": [],
+            "urls": [],
+            "documentation": "Api create a new account(inputs required:account name, status, owner details like username, password(optional) and emailId). Itcreate and associate an VCG to the account, persist the account in gateway dband return the created account.",
+            "methods": [
+                "POST"
+            ],
+            "params": [],
+            "body": {
+                "type": "com.cpn.vsp.orchestration.account.Account"
+            },
+            "response": {
+                "type": "com.cpn.vsp.orchestration.account.Account"
+            }
+        },
+        {
+            "consumes": [],
+            "headers": [],
+            "produces": [],
+            "urls": [
+                "",
+                "/{id}"
+            ],
+            "documentation": "Api update an account details for a given account and in gateway db and return the updated account.",
+            "methods": [
+                "PUT"
+            ],
+            "params": [],
+            "body": {
+                "type": "com.cpn.vsp.orchestration.account.Account"
+            },
+            "response": {
+                "type": "com.cpn.vsp.orchestration.account.Account"
+            }
+        },
+        {
+            "consumes": [],
+            "headers": [],
+            "produces": [],
+            "urls": [
+                "/{id}"
+            ],
+            "documentation": "Api remove an account, detaches the resurces associated with it, terminates the server and remove account from gateway db for a given account id.",
+            "methods": [
+                "DELETE"
+            ],
+            "params": []
+        },
+        {
+            "consumes": [],
+            "headers": [],
+            "produces": [],
+            "urls": [],
+            "documentation": "Api retrieves list of accounts.",
+            "methods": [
+                "GET"
+            ],
+            "params": [],
+            "response": {
+                "type": "array",
+                "nestedType": {
+                    "type": "com.cpn.vsp.orchestration.account.Account"
+                }
+            }
+        },
+        {
+            "consumes": [],
+            "headers": [],
+            "produces": [],
+            "urls": [
+                "/{id}/order"
+            ],
+            "documentation": "Api retrieves list orders(physical and rac oreders) for given account Id.",
+            "methods": [
+                "GET"
+            ],
+            "params": [],
+            "response": {
+                "type": "array",
+                "nestedType": {
+                    "type": "com.cpn.vsp.orchestration.order.Order"
+                }
+            }
+        },
+        {
+            "consumes": [],
+            "headers": [],
+            "produces": [],
+            "urls": [
+                "/{anAccountId}/network/{aProviderNetworkId}"
+            ],
+            "documentation": "Api remove the provider network for given account id.",
+            "methods": [
+                "DELETE"
+            ],
+            "params": []
+        },
+        {
+            "consumes": [],
+            "headers": [],
+            "produces": [],
+            "urls": [
+                "/{anAccountId}/network"
+            ],
+            "documentation": "Api adds bulk of provider networks for given account id.Please refer ProviderNetwork type for more details.",
+            "methods": [
+                "POST"
+            ],
+            "params": [],
+            "body": {
+                "type": "com.cpn.vsp.orchestration.network.ProviderNetwork"
+            },
+            "response": {
+                "type": "com.cpn.vsp.orchestration.network.ProviderNetwork"
+            }
+        },
+        {
+            "consumes": [],
+            "headers": [],
+            "produces": [],
+            "urls": [
+                "/{anAccountId}/network/{aProviderNetworkId}"
+            ],
+            "documentation": "Api retrieves set of provider networks associated with given account.",
+            "methods": [
+                "PUT"
+            ],
+            "params": [],
+            "body": {
+                "type": "com.cpn.vsp.orchestration.network.ProviderNetwork"
+            },
+            "response": {
+                "type": "com.cpn.vsp.orchestration.network.ProviderNetwork"
+            }
+        },
+        {
+            "consumes": [],
+            "headers": [],
+            "produces": [],
+            "urls": [
+                "/{anAccountId}/network/{aProviderNetworkId}"
+            ],
+            "documentation": "Api retrieve a provider network for given account id and provider network id.",
+            "methods": [
+                "GET"
+            ],
+            "params": [],
+            "response": {
+                "type": "com.cpn.vsp.orchestration.network.ProviderNetwork"
+            }
+        },
+        {
+            "consumes": [],
+            "headers": [],
+            "produces": [],
+            "urls": [
+                "/{anAccountId}/network"
+            ],
+            "documentation": "Api retieves set of provider networks associated with given account.",
+            "methods": [
+                "GET"
+            ],
+            "params": [],
+            "response": {
+                "type": "array",
+                "nestedType": {
+                    "type": "com.cpn.vsp.orchestration.network.ProviderNetwork"
+                }
+            }
+        },
+        {
+            "consumes": [],
+            "headers": [],
+            "produces": [],
+            "urls": [
+                "/{id}/resource/{resId}/asset"
+            ],
+            "documentation": "Api add a new physical device for a given account and registeres the device with Nexus.It returns the added physical asset.",
+            "methods": [
+                "POST"
+            ],
+            "params": [],
+            "body": {
+                "type": "com.cpn.vsp.orchestration.asset.PhysicalAsset"
+            },
+            "response": {
+                "type": "com.cpn.vsp.orchestration.asset.PhysicalAsset"
+            }
+        },
+        {
+            "consumes": [],
+            "headers": [],
+            "produces": [],
+            "urls": [
+                "/{accountId}/user/{userId}/mobileconfig"
+            ],
+            "documentation": "Api retrieve the mobile config for given account Id and user Id.",
+            "methods": [
+                "GET"
+            ],
+            "params": []
+        },
+        {
+            "consumes": [],
+            "headers": [],
+            "produces": [],
+            "urls": [
+                "/{acctId}/orders"
+            ],
+            "documentation": "Api creates bulk of physical and Rac orders for given accountId in one rest call.",
+            "methods": [
+                "POST"
+            ],
+            "params": [],
+            "body": {
+                "type": "array",
+                "nestedType": {
+                    "type": "com.cpn.vsp.orchestration.order.Order"
+                }
+            },
+            "response": {
+                "type": "array",
+                "nestedType": {
+                    "type": "com.cpn.vsp.orchestration.order.Order"
+                }
+            }
+        },
+        {
+            "consumes": [],
+            "headers": [],
+            "produces": [],
+            "urls": [
+                "/{acctId}/order"
+            ],
+            "documentation": "Api create a Physical/Rac order for given account id.And also persist the order details in gateway db.",
+            "methods": [
+                "POST"
+            ],
+            "params": [],
+            "body": {
+                "type": "com.cpn.vsp.orchestration.order.Order"
+            },
+            "response": {
+                "type": "com.cpn.vsp.orchestration.order.Order"
+            }
+        },
+        {
+            "consumes": [],
+            "headers": [],
+            "produces": [],
+            "urls": [
+                "/{acctId}/order/{orderId}"
+            ],
+            "documentation": "Api retrieve a physical/rac order details for given account id and order id.",
+            "methods": [
+                "GET"
+            ],
+            "params": [],
+            "response": {
+                "type": "com.cpn.vsp.orchestration.order.Order"
+            }
+        },
+        {
+            "consumes": [],
+            "headers": [],
+            "produces": [],
+            "urls": [
+                "/{acctId}/order/{orderId}"
+            ],
+            "documentation": "Api update a physical order for given order id and account id. And also update the order in gateway db.",
+            "methods": [
+                "PUT"
+            ],
+            "params": [],
+            "body": {
+                "type": "com.cpn.vsp.orchestration.order.PhysicalDeviceOrder"
+            },
+            "response": {
+                "type": "com.cpn.vsp.orchestration.order.Order"
+            }
+        },
+        {
+            "consumes": [],
+            "headers": [],
+            "produces": [],
+            "urls": [
+                "/{anAccountId}/order/{anOrderId}"
+            ],
+            "documentation": "Api remove a physical order for given order id and account id.And also remove an entry from gateway db.",
+            "methods": [
+                "DELETE"
+            ],
+            "params": []
+        },
+        {
+            "consumes": [],
+            "headers": [],
+            "produces": [],
+            "urls": [
+                "/{anAccountId}/user/{anUserId}"
+            ],
+            "documentation": "Api serach an user in the account",
+            "methods": [
+                "GET"
+            ],
+            "params": [],
+            "response": {
+                "type": "com.cpn.vsp.orchestration.user.User"
+            }
+        },
+        {
+            "consumes": [],
+            "headers": [],
+            "produces": [],
+            "urls": [
+                "/{aid}/user/{uid}"
+            ],
+            "documentation": "Api remove an user from account.",
+            "methods": [
+                "DELETE"
+            ],
+            "params": []
+        }
+    ],
+    "typeDefinitions": [
+        {
+            "type": "com.cpn.vsp.orchestration.network.Network",
+            "properties": [
+                {
+                    "type": "string",
+                    "name": "id"
+                },
+                {
+                    "type": "string",
+                    "name": "start"
+                },
+                {
+                    "type": "string",
+                    "name": "end"
+                },
+                {
+                    "type": "int",
+                    "name": "vlan"
+                }
+            ],
+            "subclasses": []
+        },
+        {
+            "type": "java.util.Set",
+            "properties": [],
+            "subclasses": [],
+            "abstractClass": true
+        },
+        {
+            "type": "com.cpn.vsp.orchestration.user.Company",
+            "properties": [
+                {
+                    "type": "string",
+                    "name": "id"
+                },
+                {
+                    "type": "string",
+                    "name": "name"
+                },
+                {
+                    "type": "string",
+                    "name": "country"
+                },
+                {
+                    "type": "string",
+                    "name": "email"
+                },
+                {
+                    "type": "string",
+                    "name": "phoneNumber"
+                },
+                {
+                    "type": "string",
+                    "name": "website"
+                }
+            ],
+            "subclasses": []
+        },
+        {
+            "type": "com.cpn.vsp.orchestration.account.Account",
+            "properties": [
+                {
+                    "type": "string",
+                    "name": "id"
+                },
+                {
+                    "type": "string",
+                    "name": "snapViewId"
+                },
+                {
+                    "type": "string",
+                    "name": "status"
+                },
+                {
+                    "type": "string",
+                    "name": "name"
+                },
+                {
+                    "type": "array",
+                    "name": "resources",
+                    "nestedType": {
+                        "type": "com.cpn.vsp.orchestration.resource.Resource"
+                    }
+                },
+                {
+                    "type": "com.cpn.vsp.orchestration.user.User",
+                    "name": "owner"
+                },
+                {
+                    "type": "string",
+                    "name": "company"
+                },
+                {
+                    "type": "array",
+                    "name": "providerNetwork",
+                    "nestedType": {
+                        "type": "com.cpn.vsp.orchestration.network.ProviderNetwork"
+                    }
+                }
+            ],
+            "subclasses": []
+        },
+        {
+            "type": "com.cpn.vsp.orchestration.resource.Resource",
+            "properties": [
+                {
+                    "type": "string",
+                    "name": "id"
+                },
+                {
+                    "type": "com.cpn.vsp.orchestration.product.Product",
+                    "name": "product"
+                },
+                {
+                    "type": "com.cpn.vsp.orchestration.asset.Asset",
+                    "name": "asset"
+                }
+            ],
+            "subclasses": []
+        },
+        {
+            "type": "com.cpn.vsp.orchestration.product.Product",
+            "properties": [
+                {
+                    "type": "string",
+                    "name": "id"
+                },
+                {
+                    "type": "string",
+                    "name": "name"
+                },
+                {
+                    "type": "string",
+                    "name": "description"
+                },
+                {
+                    "type": "string",
+                    "name": "flavor"
+                },
+                {
+                    "type": "string",
+                    "name": "image"
+                },
+                {
+                    "type": "string",
+                    "name": "poolName"
+                },
+                {
+                    "type": "string",
+                    "name": "locale"
+                },
+                {
+                    "type": "com.cpn.vsp.orchestration.image.FirmwareImage",
+                    "name": "firmware"
+                },
+                {
+                    "type": "string",
+                    "name": "createdOn"
+                },
+                {
+                    "type": "array",
+                    "name": "volumeAttachmentDescriptions",
+                    "nestedType": {
+                        "type": "com.cpn.vsp.orchestration.product.VolumeAttachmentDescription"
+                    }
+                },
+                {
+                    "type": "string",
+                    "name": "keyPairName"
+                }
+            ],
+            "subclasses": []
+        },
+        {
+            "type": "com.cpn.vsp.orchestration.asset.PhysicalAsset",
+            "properties": [
+                {
+                    "type": "string",
+                    "name": "serial"
+                },
+                {
+                    "type": "string",
+                    "name": "password"
+                }
+            ],
+            "subclasses": []
+        },
+        {
+            "type": "com.cpn.vsp.orchestration.network.ProviderNetwork",
+            "properties": [
+                {
+                    "type": "string",
+                    "name": "id"
+                },
+                {
+                    "type": "com.cpn.vsp.orchestration.network.Network",
+                    "name": "network"
+                },
+                {
+                    "type": "array",
+                    "name": "intranets",
+                    "nestedType": {
+                        "type": "com.cpn.vsp.orchestration.network.Intranet"
+                    }
+                }
+            ],
+            "subclasses": []
+        },
+        {
+            "type": "com.cpn.vsp.orchestration.network.Intranet",
+            "properties": [
+                {
+                    "type": "string",
+                    "name": "id"
+                },
+                {
+                    "type": "string",
+                    "name": "network"
+                },
+                {
+                    "type": "string",
+                    "name": "netmask"
+                },
+                {
+                    "type": "string",
+                    "name": "gateway"
+                }
+            ],
+            "subclasses": []
+        },
+        {
+            "type": "com.cpn.vsp.orchestration.user.User",
+            "properties": [
+                {
+                    "type": "string",
+                    "name": "id"
+                },
+                {
+                    "type": "string",
+                    "name": "snapViewId"
+                },
+                {
+                    "type": "string",
+                    "name": "email"
+                },
+                {
+                    "type": "string",
+                    "name": "password"
+                },
+                {
+                    "type": "boolean",
+                    "name": "verified"
+                },
+                {
+                    "type": "boolean",
+                    "name": "pending"
+                },
+                {
+                    "type": "string",
+                    "name": "firstName"
+                },
+                {
+                    "type": "string",
+                    "name": "lastName"
+                },
+                {
+                    "type": "string",
+                    "name": "username"
+                },
+                {
+                    "type": "string",
+                    "name": "language"
+                },
+                {
+                    "type": "string",
+                    "name": "openId"
+                },
+                {
+                    "type": "com.cpn.vsp.orchestration.user.Company",
+                    "name": "company"
+                }
+            ],
+            "subclasses": []
+        },
+        {
+            "type": "boolean",
+            "properties": [],
+            "subclasses": [],
+            "abstractClass": true
+        },
+        {
+            "type": "com.cpn.vsp.orchestration.product.VolumeAttachmentDescription",
+            "properties": [
+                {
+                    "type": "string",
+                    "name": "id"
+                },
+                {
+                    "type": "int",
+                    "name": "size"
+                },
+                {
+                    "type": "string",
+                    "name": "device"
+                }
+            ],
+            "subclasses": []
+        },
+        {
+            "type": "com.cpn.vsp.orchestration.image.FirmwareImage",
+            "properties": [
+                {
+                    "type": "string",
+                    "name": "id"
+                },
+                {
+                    "type": "string",
+                    "name": "uri"
+                },
+                {
+                    "type": "string",
+                    "name": "name"
+                },
+                {
+                    "type": "string",
+                    "name": "revision"
+                },
+                {
+                    "type": "string",
+                    "name": "architecture"
+                },
+                {
+                    "type": "string",
+                    "name": "checksum"
+                },
+                {
+                    "type": "int",
+                    "name": "size"
+                }
+            ],
+            "subclasses": []
+        },
+        {
+            "type": "com.cpn.vsp.orchestration.asset.Asset",
+            "properties": [
+                {
+                    "type": "string",
+                    "name": "id"
+                },
+                {
+                    "optional": false,
+                    "type": "string",
+                    "name": "class",
+                    "requiredValue": "com.cpn.vsp.orchestration.asset.Asset"
+                }
+            ],
+            "subclasses": [
+                {
+                    "type": "com.cpn.vsp.orchestration.asset.PhysicalAsset"
+                },
+                {
+                    "type": "com.cpn.vsp.orchestration.asset.VirtualAsset"
+                }
+            ],
+            "abstractClass": true
+        },
+        {
+            "type": "com.cpn.vsp.orchestration.asset.VirtualAsset",
+            "properties": [
+                {
+                    "type": "string",
+                    "name": "serverId"
+                },
+                {
+                    "type": "string",
+                    "name": "ipAddress"
+                },
+                {
+                    "type": "string",
+                    "name": "hostName"
+                }
+            ],
+            "subclasses": []
+        },
+        {
+            "type": "com.cpn.vsp.orchestration.order.Order",
+            "properties": [
+                {
+                    "type": "string",
+                    "name": "id"
+                },
+                {
+                    "optional": false,
+                    "type": "string",
+                    "name": "class",
+                    "requiredValue": "com.cpn.vsp.orchestration.order.Order"
+                }
+            ],
+            "subclasses": [
+                {
+                    "type": "com.cpn.vsp.orchestration.order.PhysicalDeviceOrder"
+                },
+                {
+                    "type": "com.cpn.vsp.orchestration.order.RACLicenseOrder"
+                }
+            ],
+            "abstractClass": true
+        },
+        {
+            "type": "com.cpn.vsp.orchestration.order.RACLicenseOrder",
+            "properties": [
+                {
+                    "type": "int",
+                    "name": "quantity"
+                }
+            ],
+            "subclasses": []
+        },
+        {
+            "type": "com.cpn.vsp.orchestration.order.PhysicalDeviceOrder",
+            "properties": [
+                {
+                    "type": "com.cpn.vsp.orchestration.product.Product",
+                    "name": "product"
+                },
+                {
+                    "type": "string",
+                    "name": "snapDeviceId"
+                }
+            ],
+            "subclasses": []
+        }
+    ]
+}

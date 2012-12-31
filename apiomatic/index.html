@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>API-O-Matic</title>
+<link rel="stylesheet" href="css/style.css">
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="navbar">
+	<div id="banner">
+		<div id="logo-bar">
+			<div id="logo" class="brand"></div>
+			<div class="page-header">
+				<span>
+				ClearPath API Documentation
+				</span>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Templates -->
+
+<p style="display:none;">
+	<textarea id="Template-List" rows="0" cols="0">
+		{#template MAIN}
+			<div id="col1"  class="height">
+				<div class="header_controller">Services List</div>
+
+					<form class="form-search">
+					<div class="input-append">
+					<input type="text" class="span2 search" placeholder="Search for a service" id="search">
+					<button type="submit" class="btn">Search</button>
+					</div>				
+					</form>
+
+					<table id="controller_list">
+					{#foreach $T.services as cust}
+					{#include ROW root=$T.cust}
+					{#/for}		
+					</table>
+			</div>
+		{#/template MAIN}
+
+	{#template ROW}
+
+	<tr bgcolor="{#cycle values=['#295a83','#204d72']}">
+    	<td><img src ="img/img_arrow_new.png "/><a id="{$T.name}alink" href="#{$T.name}">{$T.name}</a></td>
+    </tr>
+	{#/template ROW}
+	</textarea>
+</p>
+
+<!-- Templates -->
+<div id="col2_main" class="margin">
+
+	<div class="text_message" align="center">
+		<p>Welcome to Apiomatic Representation.</p><br>
+		<p class="text">Click on the Controller to view its Details.</p>
+	</div>
+
+<div style="display:none">
+	<textarea id="Template-Details" rows="0" cols="0">
+		{#template MAIN}
+			<div id="col2" class="margin">
+				<div class="table-header well">About</div>
+
+					<table class="table table-bordered">
+						<thead>
+							
+							<td style="width:80%"></td>
+						</thead>
+
+							<tr><td><b>{$T.urls}<b></td></tr>
+							<tr><td>{$T.documentation}</td></tr>
+					</table>
+
+			<div class="table-header well">Method</div>
+				<table class="table table-bordered">
+					<thead>
+					<td style="width:30%"></td>
+					<td style="width:70%"></td>
+					</thead>
+
+				{#foreach $T.methods as method} 
+
+				<tr class="url_header"><td colspan="2"><a href="#" class="link">{$T.urls} {$T.method.urls}</a></td></tr>
+				{#if $T.method.documentation.length !== 0}
+				<tr>
+				<td class="header">Documentation</td><td>{$T.method.documentation}</td>
+				</tr>
+				{#/if}
+				<tr><td class="header">Methods</td><td>{$T.method.methods}</td></tr>
+				{#if $T.method.body.type !== "array"}
+					<tr>
+						<td class="header">Body</td><td>Type is<a class="link arrow" href="#{$P.name}/{$T.method.body.type.replace(/\./g,'-')}" >{$T.method.body.type}</a></td>
+					</tr>
+				{#else}
+					<tr>
+						{#foreach $T.method.body.nestedType as nestedType}
+							<td class="header">Body</td><td>Type is Array of<a  href="#{$P.name}/{$T.nestedType.replace(/\./g,'-')}"  class="link">{$T.nestedType}</a></td>
+						{#/for}
+					</tr>
+				{#/if}
+
+
+				{#if $T.method.response.type !== "array"}
+				<tr>
+					<td class="header">Response</td><td>Type is<a href="#{$P.name}/{$T.method.response.type.replace(/\./g,'-')}" class="link">{$T.method.response.type}</a></td>
+				</tr>
+				{#else}
+					<tr>
+						{#foreach $T.method.response.nestedType as nestedType}
+							<td class="header">Response</td><td>Type is Array of<a href="#{$P.name}/#{$T.nestedType.replace(/\./g,'-')}" class="link">{$T.nestedType}</a></td>
+						{#/for}
+					</tr>
+				{#/if}
+
+				{#/for}
+
+				</table>
+
+			<div class="table-header well">Type Definition</div>
+
+			{#foreach $T.typeDefinitions as typedef}
+				<div class="accordion" id="accordion2">
+					<div class="accordion-group">
+						<div class="accordion-heading arrow expand-arrow" id="{$T.typedef.type.replace(/\./g,'-')}link check">
+							<div class="muted accordion-toggle" href="{$P.name}/#{$T.typedef.type.replace(/\./g,'-')}" id="{$T.typedef.type.replace(/\./g,'-')}link" data-toggle="collapse">
+							{$T.typedef.type}{#if $T.typedef.abstractClass == true}&nbsp;[ABSTRACT]{#/if}
+							</div>
+						</div>
+
+							<div id="{$T.typedef.type.replace(/\./g,'-')}" class="accordion-body collapse" style="height:0px;">
+								<div class="accordion-inner">
+									
+									<table  class="table_type">
+										{#if $T.typedef.properties.length !== 0}
+										<tr>
+											<td><b>Properties:</b></td>
+										</tr>
+										{#/if}
+										{#foreach $T.typedef.properties as subtype}
+										<tr>
+										<td><b>{$T.subtype.name}{#if $T.subtype.name == "class"}<span class="required">!</span><span class="dropt" title="{$T.typedef.type}">
+  										<span>Required value:{$T.typedef.type}</span></span>{#/if}</b> is of type {#if $T.subtype.type.indexOf(".") > 0}<a href="#{$P.name}/{$T.subtype.type.replace(/\./g,'-')}" class="link arrow">{$T.subtype.type}{#else}{$T.subtype.type}</a>{#/if}</td>
+										</tr>
+										{#/for}
+									</table>
+
+								{#if $T.typedef.abstractClass == true && $T.typedef.subclasses.length !== 0}
+									<table  class="table_type">
+										<tr><td style="width:10%"><b>subclasses:</b></td>
+											<td style="width:90%">
+										{#foreach $T.typedef.subclasses as typedef}
+										 <a id="" class="link" href="#{$P.name}/{$T.typedef.type.replace(/\./g,'-')}">
+										 	{$T.typedef.type}
+										</a>
+										{#/for}
+									</td>
+									</tr>
+									</table>
+								{#/if}
+							</div>
+						</div>
+					</div>
+				</div>
+			{#/for}	
+			</div>
+		{#/template MAIN}
+		</textarea>
+	</div>
+</div>		
+
+<!-- Output elements -->
+<div id="Customerslist"></div>
+<div id="Customerdetails"></div>
+<!-- Output elements -->
+
+<!-- /container --><!-- Le javascript ================================================== --><!-- Placed at the end of the document so the pages load faster -->
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/jquery-jtemplates.js"></script>
+<script type="text/javascript" src="js/underscore.js"></script>
+<script type="text/javascript" src="js/coffee-script.js"></script>
+<script type="text/javascript" src="js/backbone.js"></script>
+<script src="js/bootstrap-collapse.js"></script>
+<script type="text/coffeescript" src="js/apiomatic.coffee"></script>
+</body>
+</html>

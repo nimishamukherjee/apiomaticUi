@@ -1,0 +1,706 @@
+{
+    "urls": [
+        "/resource"
+    ],
+    "documentation": "Resource controller used for performing CRUD operation on resource, retrieving signedCSR, terminating asset associated with resource, retrieving firmware for the given serial key, ipaddressof the asset",
+    "packageName": "com.cpn.vsp.orchestration.resource",
+    "methods": [
+        {
+            "consumes": [],
+            "headers": [],
+            "produces": [],
+            "urls": [
+                "/physical"
+            ],
+            "methods": [
+                "POST"
+            ],
+            "params": [],
+            "body": {
+                "type": "com.cpn.vsp.orchestration.resource.Resource"
+            },
+            "response": {
+                "type": "com.cpn.vsp.orchestration.resource.Resource"
+            }
+        },
+        {
+            "consumes": [],
+            "headers": [],
+            "produces": [],
+            "urls": [
+                "/physical/{serialKey}/signCSR"
+            ],
+            "methods": [
+                "PUT"
+            ],
+            "params": [],
+            "body": {
+                "type": "string"
+            },
+            "response": {
+                "type": "array",
+                "nestedType": {
+                    "type": "byte"
+                }
+            }
+        },
+        {
+            "consumes": [],
+            "headers": [],
+            "produces": [],
+            "urls": [
+                "/physical/{serialKey}/account"
+            ],
+            "methods": [
+                "GET"
+            ],
+            "params": [],
+            "response": {
+                "type": "com.cpn.vsp.orchestration.account.Account"
+            }
+        },
+        {
+            "consumes": [],
+            "headers": [],
+            "produces": [],
+            "urls": [
+                "/physical"
+            ],
+            "methods": [
+                "PUT"
+            ],
+            "params": [],
+            "body": {
+                "type": "com.cpn.vsp.orchestration.resource.Resource"
+            },
+            "response": {
+                "type": "com.cpn.vsp.orchestration.resource.Resource"
+            }
+        },
+        {
+            "consumes": [],
+            "headers": [],
+            "produces": [],
+            "urls": [
+                "/physical/{serialKey}"
+            ],
+            "methods": [
+                "GET"
+            ],
+            "params": [],
+            "response": {
+                "type": "com.cpn.vsp.orchestration.resource.Resource"
+            }
+        },
+        {
+            "consumes": [],
+            "headers": [],
+            "produces": [],
+            "urls": [
+                "/physical/{serialKey}"
+            ],
+            "methods": [
+                "DELETE"
+            ],
+            "params": []
+        },
+        {
+            "consumes": [],
+            "headers": [],
+            "produces": [],
+            "urls": [
+                "/physical/{serialKey}/firmware"
+            ],
+            "methods": [
+                "GET"
+            ],
+            "params": []
+        },
+        {
+            "consumes": [],
+            "headers": [],
+            "produces": [],
+            "urls": [
+                "/physical/{serialKey}/firmware/checksum"
+            ],
+            "methods": [
+                "GET"
+            ],
+            "params": [],
+            "response": {
+                "type": "string"
+            }
+        },
+        {
+            "consumes": [],
+            "headers": [],
+            "produces": [],
+            "urls": [
+                "/{resourceId}/virtual/ipaddress"
+            ],
+            "methods": [
+                "GET"
+            ],
+            "params": [],
+            "response": {
+                "type": "string"
+            }
+        },
+        {
+            "consumes": [],
+            "headers": [],
+            "produces": [],
+            "urls": [],
+            "methods": [
+                "GET"
+            ],
+            "params": [],
+            "response": {
+                "type": "array",
+                "nestedType": {
+                    "type": "com.cpn.vsp.orchestration.resource.Resource"
+                }
+            }
+        },
+        {
+            "consumes": [],
+            "headers": [],
+            "produces": [],
+            "urls": [
+                "/{aResourceId}"
+            ],
+            "methods": [
+                "GET"
+            ],
+            "params": [],
+            "response": {
+                "type": "com.cpn.vsp.orchestration.resource.Resource"
+            }
+        },
+        {
+            "consumes": [],
+            "headers": [],
+            "produces": [],
+            "urls": [
+                "/{resourceId}"
+            ],
+            "methods": [
+                "DELETE"
+            ],
+            "params": []
+        },
+        {
+            "consumes": [],
+            "headers": [],
+            "produces": [],
+            "urls": [],
+            "methods": [
+                "POST"
+            ],
+            "params": [],
+            "body": {
+                "type": "com.cpn.vsp.orchestration.resource.AssetRequest"
+            },
+            "response": {
+                "type": "com.cpn.vsp.orchestration.resource.Resource"
+            }
+        },
+        {
+            "consumes": [],
+            "headers": [],
+            "produces": [],
+            "urls": [
+                "/physical/{serialKey}/password"
+            ],
+            "methods": [
+                "GET"
+            ],
+            "params": [],
+            "response": {
+                "type": "string"
+            }
+        },
+        {
+            "consumes": [],
+            "headers": [],
+            "produces": [],
+            "urls": [
+                "/physical/{serialKey}/hostname"
+            ],
+            "methods": [
+                "GET"
+            ],
+            "params": [],
+            "response": {
+                "type": "string"
+            }
+        },
+        {
+            "consumes": [],
+            "headers": [],
+            "produces": [],
+            "urls": [
+                "/physical/{serialKey}/password"
+            ],
+            "methods": [
+                "PUT"
+            ],
+            "params": [],
+            "body": {
+                "type": "string"
+            }
+        }
+    ],
+    "typeDefinitions": [
+        {
+            "type": "java.util.Set",
+            "properties": [],
+            "subclasses": [],
+            "abstractClass": true
+        },
+        {
+            "type": "byte",
+            "properties": [],
+            "subclasses": [],
+            "abstractClass": true
+        },
+        {
+            "type": "com.cpn.vsp.orchestration.resource.AssetRequest",
+            "properties": [
+                {
+                    "type": "com.cpn.vsp.orchestration.product.Product",
+                    "name": "product"
+                },
+                {
+                    "type": "string",
+                    "name": "hostname"
+                },
+                {
+                    "type": "string",
+                    "name": "userData"
+                },
+                {
+                    "type": "string",
+                    "name": "ipAddress"
+                },
+                {
+                    "type": "com.cpn.vsp.orchestration.project.Project",
+                    "name": "project"
+                }
+            ],
+            "subclasses": []
+        },
+        {
+            "type": "com.cpn.vsp.orchestration.account.Account",
+            "properties": [
+                {
+                    "type": "string",
+                    "name": "id"
+                },
+                {
+                    "type": "string",
+                    "name": "snapViewId"
+                },
+                {
+                    "type": "string",
+                    "name": "status"
+                },
+                {
+                    "type": "string",
+                    "name": "name"
+                },
+                {
+                    "type": "array",
+                    "name": "resources",
+                    "nestedType": {
+                        "type": "com.cpn.vsp.orchestration.resource.Resource"
+                    }
+                },
+                {
+                    "type": "com.cpn.vsp.orchestration.user.User",
+                    "name": "owner"
+                },
+                {
+                    "type": "string",
+                    "name": "company"
+                },
+                {
+                    "type": "array",
+                    "name": "providerNetwork",
+                    "nestedType": {
+                        "type": "com.cpn.vsp.orchestration.network.ProviderNetwork"
+                    }
+                }
+            ],
+            "subclasses": []
+        },
+        {
+            "type": "com.cpn.vsp.orchestration.network.Network",
+            "properties": [
+                {
+                    "type": "string",
+                    "name": "id"
+                },
+                {
+                    "type": "string",
+                    "name": "start"
+                },
+                {
+                    "type": "string",
+                    "name": "end"
+                },
+                {
+                    "type": "int",
+                    "name": "vlan"
+                }
+            ],
+            "subclasses": []
+        },
+        {
+            "type": "com.cpn.vsp.orchestration.user.Company",
+            "properties": [
+                {
+                    "type": "string",
+                    "name": "id"
+                },
+                {
+                    "type": "string",
+                    "name": "name"
+                },
+                {
+                    "type": "string",
+                    "name": "country"
+                },
+                {
+                    "type": "string",
+                    "name": "email"
+                },
+                {
+                    "type": "string",
+                    "name": "phoneNumber"
+                },
+                {
+                    "type": "string",
+                    "name": "website"
+                }
+            ],
+            "subclasses": []
+        },
+        {
+            "type": "com.cpn.vsp.orchestration.product.Product",
+            "properties": [
+                {
+                    "type": "string",
+                    "name": "id"
+                },
+                {
+                    "type": "string",
+                    "name": "name"
+                },
+                {
+                    "type": "string",
+                    "name": "description"
+                },
+                {
+                    "type": "string",
+                    "name": "flavor"
+                },
+                {
+                    "type": "string",
+                    "name": "image"
+                },
+                {
+                    "type": "string",
+                    "name": "poolName"
+                },
+                {
+                    "type": "string",
+                    "name": "locale"
+                },
+                {
+                    "type": "com.cpn.vsp.orchestration.image.FirmwareImage",
+                    "name": "firmware"
+                },
+                {
+                    "type": "string",
+                    "name": "createdOn"
+                },
+                {
+                    "type": "array",
+                    "name": "volumeAttachmentDescriptions",
+                    "nestedType": {
+                        "type": "com.cpn.vsp.orchestration.product.VolumeAttachmentDescription"
+                    }
+                },
+                {
+                    "type": "string",
+                    "name": "keyPairName"
+                }
+            ],
+            "subclasses": []
+        },
+        {
+            "type": "com.cpn.vsp.orchestration.resource.Resource",
+            "properties": [
+                {
+                    "type": "string",
+                    "name": "id"
+                },
+                {
+                    "type": "com.cpn.vsp.orchestration.product.Product",
+                    "name": "product"
+                },
+                {
+                    "type": "com.cpn.vsp.orchestration.asset.Asset",
+                    "name": "asset"
+                }
+            ],
+            "subclasses": []
+        },
+        {
+            "type": "com.cpn.vsp.orchestration.network.ProviderNetwork",
+            "properties": [
+                {
+                    "type": "string",
+                    "name": "id"
+                },
+                {
+                    "type": "com.cpn.vsp.orchestration.network.Network",
+                    "name": "network"
+                },
+                {
+                    "type": "array",
+                    "name": "intranets",
+                    "nestedType": {
+                        "type": "com.cpn.vsp.orchestration.network.Intranet"
+                    }
+                }
+            ],
+            "subclasses": []
+        },
+        {
+            "type": "com.cpn.vsp.orchestration.network.Intranet",
+            "properties": [
+                {
+                    "type": "string",
+                    "name": "id"
+                },
+                {
+                    "type": "string",
+                    "name": "network"
+                },
+                {
+                    "type": "string",
+                    "name": "netmask"
+                },
+                {
+                    "type": "string",
+                    "name": "gateway"
+                }
+            ],
+            "subclasses": []
+        },
+        {
+            "type": "com.cpn.vsp.orchestration.user.User",
+            "properties": [
+                {
+                    "type": "string",
+                    "name": "id"
+                },
+                {
+                    "type": "string",
+                    "name": "snapViewId"
+                },
+                {
+                    "type": "string",
+                    "name": "email"
+                },
+                {
+                    "type": "string",
+                    "name": "password"
+                },
+                {
+                    "type": "boolean",
+                    "name": "verified"
+                },
+                {
+                    "type": "boolean",
+                    "name": "pending"
+                },
+                {
+                    "type": "string",
+                    "name": "firstName"
+                },
+                {
+                    "type": "string",
+                    "name": "lastName"
+                },
+                {
+                    "type": "string",
+                    "name": "username"
+                },
+                {
+                    "type": "string",
+                    "name": "language"
+                },
+                {
+                    "type": "string",
+                    "name": "openId"
+                },
+                {
+                    "type": "com.cpn.vsp.orchestration.user.Company",
+                    "name": "company"
+                }
+            ],
+            "subclasses": []
+        },
+        {
+            "type": "boolean",
+            "properties": [],
+            "subclasses": [],
+            "abstractClass": true
+        },
+        {
+            "type": "com.cpn.vsp.orchestration.product.VolumeAttachmentDescription",
+            "properties": [
+                {
+                    "type": "string",
+                    "name": "id"
+                },
+                {
+                    "type": "int",
+                    "name": "size"
+                },
+                {
+                    "type": "string",
+                    "name": "device"
+                }
+            ],
+            "subclasses": []
+        },
+        {
+            "type": "com.cpn.vsp.orchestration.image.FirmwareImage",
+            "properties": [
+                {
+                    "type": "string",
+                    "name": "id"
+                },
+                {
+                    "type": "string",
+                    "name": "uri"
+                },
+                {
+                    "type": "string",
+                    "name": "name"
+                },
+                {
+                    "type": "string",
+                    "name": "revision"
+                },
+                {
+                    "type": "string",
+                    "name": "architecture"
+                },
+                {
+                    "type": "string",
+                    "name": "checksum"
+                },
+                {
+                    "type": "int",
+                    "name": "size"
+                }
+            ],
+            "subclasses": []
+        },
+        {
+            "type": "com.cpn.vsp.orchestration.asset.Asset",
+            "properties": [
+                {
+                    "type": "string",
+                    "name": "id"
+                },
+                {
+                    "optional": false,
+                    "type": "string",
+                    "name": "class",
+                    "requiredValue": "com.cpn.vsp.orchestration.asset.Asset"
+                }
+            ],
+            "subclasses": [
+                {
+                    "type": "com.cpn.vsp.orchestration.asset.PhysicalAsset"
+                },
+                {
+                    "type": "com.cpn.vsp.orchestration.asset.VirtualAsset"
+                }
+            ],
+            "abstractClass": true
+        },
+        {
+            "type": "com.cpn.vsp.orchestration.asset.VirtualAsset",
+            "properties": [
+                {
+                    "type": "string",
+                    "name": "serverId"
+                },
+                {
+                    "type": "string",
+                    "name": "ipAddress"
+                },
+                {
+                    "type": "string",
+                    "name": "hostName"
+                }
+            ],
+            "subclasses": []
+        },
+        {
+            "type": "com.cpn.vsp.orchestration.asset.PhysicalAsset",
+            "properties": [
+                {
+                    "type": "string",
+                    "name": "serial"
+                },
+                {
+                    "type": "string",
+                    "name": "password"
+                }
+            ],
+            "subclasses": []
+        },
+        {
+            "type": "com.cpn.vsp.orchestration.project.Project",
+            "properties": [
+                {
+                    "type": "string",
+                    "name": "id"
+                },
+                {
+                    "type": "string",
+                    "name": "name"
+                },
+                {
+                    "type": "string",
+                    "name": "username"
+                },
+                {
+                    "type": "string",
+                    "name": "password"
+                },
+                {
+                    "type": "string",
+                    "name": "endPointURL"
+                },
+                {
+                    "type": "string",
+                    "name": "tenant"
+                },
+                {
+                    "type": "string",
+                    "name": "computeRegionName"
+                }
+            ],
+            "subclasses": []
+        }
+    ]
+}
