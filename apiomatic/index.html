@@ -25,7 +25,7 @@
 <!-- Templates -->
 
 <p style="display:none;">
-	<textarea id="Template-List" rows="0" cols="0">
+	<textarea id="controller-template" rows="0" cols="0">
 		{#template MAIN}
 			<div id="col1"  class="height">
 				<div class="header_controller">Services List</div>
@@ -63,7 +63,7 @@
 	</div>
 
 <div style="display:none">
-	<textarea id="Template-Details" rows="0" cols="0">
+	<textarea id="controller-details-template" rows="0" cols="0">
 		{#template MAIN}
 			<div id="col2" class="margin">
 				<div class="table-header well">About</div>
@@ -114,7 +114,7 @@
 				{#else}
 					<tr>
 						{#foreach $T.method.response.nestedType as nestedType}
-							<td class="header">Response</td><td>Type is Array of<a href="#{$P.name}/#{$T.nestedType.replace(/\./g,'-')}" class="link">{$T.nestedType}</a></td>
+							<td class="header">Response</td><td>Type is Array of<a href="#{$P.name}/{$T.nestedType.replace(/\./g,'-')}" class="link">{$T.nestedType}</a></td>
 						{#/for}
 					</tr>
 				{#/if}
@@ -129,7 +129,7 @@
 				<div class="accordion" id="accordion2">
 					<div class="accordion-group">
 						<div class="accordion-heading arrow expand-arrow" id="{$T.typedef.type.replace(/\./g,'-')}link check">
-							<div class="muted accordion-toggle" href="{$P.name}/#{$T.typedef.type.replace(/\./g,'-')}" id="{$T.typedef.type.replace(/\./g,'-')}link" data-toggle="collapse">
+							<div class="muted accordion-toggle" href="#{$T.typedef.type.replace(/\./g,'-')}" id="{$T.typedef.type.replace(/\./g,'-')}link" data-toggle="collapse">
 							{$T.typedef.type}{#if $T.typedef.abstractClass == true}&nbsp;[ABSTRACT]{#/if}
 							</div>
 						</div>
@@ -146,7 +146,7 @@
 										{#foreach $T.typedef.properties as subtype}
 										<tr>
 										<td><b>{$T.subtype.name}{#if $T.subtype.name == "class"}<span class="required">!</span><span class="dropt" title="{$T.typedef.type}">
-  										<span>Required value:{$T.typedef.type}</span></span>{#/if}</b> is of type {#if $T.subtype.type.indexOf(".") > 0}<a href="#{$P.name}/{$T.subtype.type.replace(/\./g,'-')}" class="link arrow">{$T.subtype.type}{#else}{$T.subtype.type}</a>{#/if}</td>
+  										<span>Required value:{$T.typedef.type}</span></span>{#/if}</b> is of type {#if $T.subtype.type.indexOf(".") > 0}<a href="{$T.subtype.type.replace(/\./g,'-')}" class="link arrow">{$T.subtype.type}{#else}{$T.subtype.type}</a>{#/if}</td>
 										</tr>
 										{#/for}
 									</table>
@@ -156,7 +156,7 @@
 										<tr><td style="width:10%"><b>subclasses:</b></td>
 											<td style="width:90%">
 										{#foreach $T.typedef.subclasses as typedef}
-										 <a id="" class="link" href="#{$P.name}/{$T.typedef.type.replace(/\./g,'-')}">
+										 <a id="" class="link" href="{$T.typedef.type.replace(/\./g,'-')}">
 										 	{$T.typedef.type}
 										</a>
 										{#/for}
@@ -176,8 +176,8 @@
 </div>		
 
 <!-- Output elements -->
-<div id="Customerslist"></div>
-<div id="Customerdetails"></div>
+<div id="controllerlist"></div>
+<div id="controllerDetails"></div>
 <!-- Output elements -->
 
 <!-- /container --><!-- Le javascript ================================================== --><!-- Placed at the end of the document so the pages load faster -->
@@ -186,6 +186,7 @@
 <script type="text/javascript" src="js/underscore.js"></script>
 <script type="text/javascript" src="js/coffee-script.js"></script>
 <script type="text/javascript" src="js/backbone.js"></script>
+<script type="text/javascript" src="js/backbone.queryparams.js"></script>
 <script src="js/bootstrap-collapse.js"></script>
 <script type="text/coffeescript" src="js/apiomatic.coffee"></script>
 </body>
