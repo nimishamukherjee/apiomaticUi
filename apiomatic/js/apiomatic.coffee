@@ -20,11 +20,13 @@ AppRouter = Backbone.Router.extend
       path = "#" + link + "link"
       $(path).trigger "click"
       $("#" + link).collapse("show")
-      $("#" + link).attr("tabindex",-1).focus())
-
+      $("html,body").animate
+        
+        scrollTop: $(path).offset().top, "slow"
+      )
   showController: (controller, callback) ->
     @loadControllerList ->
-      if @controllerList
+      if @controllerList && @controllerList.controller is controller 
         callback()
       else         
         @controllerList = new ControllerCollection
@@ -34,6 +36,9 @@ AppRouter = Backbone.Router.extend
             $("#controllerDetails").setTemplateElement("controller-details-template")
             $("#controllerDetails").setParam('name', controller);
             $("#controllerDetails").processTemplate(models.toJSON()[0])
+            $(".collapse").on "show", ->
+              targetLink = "#" + controller + "/" + $(this).attr("id")  
+              app.navigate(targetLink)
             $(".arrow").click ->
               $(this).next().show ->
                 if $(this).prev().hasClass("expand-arrow")
@@ -41,10 +46,11 @@ AppRouter = Backbone.Router.extend
                 else
                   $(this).prev().removeClass("collapse-arrow").addClass "expand-arrow"
             if callback 
+              
               callback()                  
           error: (model, response) ->
             console.log "error Message"              
-  
+ 
   loadControllerList: (callback)->
     if @controllerListView
       callback()

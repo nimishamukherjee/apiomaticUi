@@ -108,13 +108,26 @@
 
 
 				{#if $T.method.response.type !== "array"}
-				<tr>
-					<td class="header">Response</td><td>Type is<a href="#{$P.name}/{$T.method.response.type.replace(/\./g,'-')}" class="link">{$T.method.response.type}</a></td>
-				</tr>
+					{#if $T.method.response.type.indexOf("com.cpn") === 0}
+						<tr>
+							<td class="header">Response</td><td>Type is<a href="#{$P.name}/{$T.method.response.type.replace(/\./g,'-')}" class="link">{$T.method.response.type}</a></td>
+						</tr>
+					{#else}
+						<tr>
+							<td class="header">Response</td><td>{$T.method.response.type}</td>
+						</tr>
+					{#/if}
+											
 				{#else}
 					<tr>
 						{#foreach $T.method.response.nestedType as nestedType}
-							<td class="header">Response</td><td>Type is Array of<a href="#{$P.name}/{$T.nestedType.replace(/\./g,'-')}" class="link">{$T.nestedType}</a></td>
+							{#if $T.nestedType.indexOf("com.cpn") === 0}
+								<td class="header">Response</td><td>Type is Array of<a href="#{$P.name}/{$T.nestedType.replace(/\./g,'-')}" class="link">{$T.nestedType}</a></td>
+							{#else}
+								<tr>
+									<td class="header">Response</td><td>{$T.nestedType}</td>
+								</tr>
+							{#/if}
 						{#/for}
 					</tr>
 				{#/if}
@@ -129,9 +142,9 @@
 				<div class="accordion" id="accordion2">
 					<div class="accordion-group">
 						<div class="accordion-heading arrow expand-arrow" id="{$T.typedef.type.replace(/\./g,'-')}link check">
-							<div class="muted accordion-toggle" href="#{$T.typedef.type.replace(/\./g,'-')}" id="{$T.typedef.type.replace(/\./g,'-')}link" data-toggle="collapse">
+							<a class="muted accordion-toggle" href="#{$T.typedef.type.replace(/\./g,'-')}" id="{$T.typedef.type.replace(/\./g,'-')}link" data-toggle="collapse">
 							{$T.typedef.type}{#if $T.typedef.abstractClass == true}&nbsp;[ABSTRACT]{#/if}
-							</div>
+							</a>
 						</div>
 
 							<div id="{$T.typedef.type.replace(/\./g,'-')}" class="accordion-body collapse" style="height:0px;">
@@ -146,7 +159,7 @@
 										{#foreach $T.typedef.properties as subtype}
 										<tr>
 										<td><b>{$T.subtype.name}{#if $T.subtype.name == "class"}<span class="required">!</span><span class="dropt" title="{$T.typedef.type}">
-  										<span>Required value:{$T.typedef.type}</span></span>{#/if}</b> is of type {#if $T.subtype.type.indexOf(".") > 0}<a href="{$T.subtype.type.replace(/\./g,'-')}" class="link arrow">{$T.subtype.type}{#else}{$T.subtype.type}</a>{#/if}</td>
+  										<span>Required value:{$T.typedef.type}</span></span>{#/if}</b> is of type {#if $T.subtype.type.indexOf(".") > 0}<a href="#{$P.name}/{$T.subtype.type.replace(/\./g,'-')}" class="link arrow">{$T.subtype.type}{#else}{$T.subtype.type}</a>{#/if}</td>
 										</tr>
 										{#/for}
 									</table>
@@ -186,7 +199,6 @@
 <script type="text/javascript" src="js/underscore.js"></script>
 <script type="text/javascript" src="js/coffee-script.js"></script>
 <script type="text/javascript" src="js/backbone.js"></script>
-<script type="text/javascript" src="js/backbone.queryparams.js"></script>
 <script src="js/bootstrap-collapse.js"></script>
 <script type="text/coffeescript" src="js/apiomatic.coffee"></script>
 </body>
