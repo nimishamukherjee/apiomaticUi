@@ -86,8 +86,7 @@
 					</thead>
 
 				{#foreach $T.methods as method} 
-
-				<tr class="url_header"><td colspan="2"><a href="#" class="link">{$T.urls} {$T.method.urls}</a></td></tr>
+				<tr class="url_header"><td colspan="2"><a href="#{$P.name}/{window.urlUpdate($T.urls, $T.method.urls)}"  class="link">{$T.urls} {$T.method.urls}</a></td></tr>
 				{#if $T.method.documentation.length !== 0}
 				<tr>
 				<td class="header">Documentation</td><td>{$T.method.documentation}</td>
@@ -201,5 +200,16 @@
 <script type="text/javascript" src="js/backbone.js"></script>
 <script src="js/bootstrap-collapse.js"></script>
 <script type="text/coffeescript" src="js/apiomatic.coffee"></script>
+<script type="text/javascript">
+	window.urlUpdate = function(url1, url2)
+	{
+	  if  (url1 !== undefined && url2 !== undefined)
+	  {
+	  	var str = url1 + " " + url2;
+	  	str = str.replace(/\{/g,"-").replace(/\}/g,"-").replace(/\//g,"-").replace(/\--/g,"-");
+	  	return str;
+	  }
+	}
+</script>
 </body>
 </html>
