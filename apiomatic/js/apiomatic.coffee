@@ -16,12 +16,11 @@ AppRouter = Backbone.Router.extend
     "": "loadControllerList"
     
   showLink: (controller, link) ->
-    @showController controller, (->  
+    @showController controller, (->
       path = "#" + link + "link"
       $(path).trigger "click"
       $("#" + link).collapse("show")
       $("html,body").animate
-        
         scrollTop: $(path).offset().top, "slow"
       )
   showController: (controller, callback) ->
@@ -37,7 +36,7 @@ AppRouter = Backbone.Router.extend
             $("#controllerDetails").setParam('name', controller);
             $("#controllerDetails").processTemplate(models.toJSON()[0])
             $(".collapse").on "show", ->
-              targetLink = "#" + controller + "/" + $(this).attr("id")  
+              targetLink = "#" + controller + "/" + $(this).attr("id")
               app.navigate(targetLink)
             $(".arrow").click ->
               $(this).next().show ->
